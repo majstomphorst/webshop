@@ -3,7 +3,8 @@ require_once 'incl/data_storage.php';
 
 function validateLoginForm()
 {
-    $data = getPostVar('login');
+    $data['email'] = test_input(getPostVar('email'));
+    $data['password'] = test_input(getPostVar('password'));
     $data['valid'] = true;
 
     // check if field are empty
@@ -34,7 +35,7 @@ function showLoginForm($data)
 
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" type="text" name="login[email]" value="' . getArrayVar($data, 'email') . '"placeholder="Email">
+                            <input class="form-control" type="text" name="email" value="' . getArrayVar($data, 'email') . '"placeholder="Email">
                         </div> <!-- input-group.// -->
                         <small class="form-text text-danger">' . getArrayVar($data, 'emailErr') . '</small>
                     </div> <!-- form-group// -->
@@ -42,7 +43,7 @@ function showLoginForm($data)
 
                     <div class="form-group">
                         <div class="input-group">
-                            <input class="form-control" type="password" name="login[password]" value="' . getArrayVar($data, 'password') . '"placeholder="Password">
+                            <input class="form-control" type="password" name="password" value="' . getArrayVar($data, 'password') . '"placeholder="Password">
                         </div> <!-- input-group.// -->
                         <small class="form-text text-danger">' . getArrayVar($data, 'passwordErr') . '</small>
                     </div> <!-- form-group// -->

@@ -166,7 +166,6 @@ function showResponsePage($data)
             require_once 'classes/home_doc.php';
             $view = new HomeDoc($data);
             $view->show();
-            var_dump('ah');
             break;
         case 'about':
             require_once 'classes/about_doc.php';
@@ -178,7 +177,13 @@ function showResponsePage($data)
             $view = new ContactDoc($data);
             $view->show();
             break;
-
+        case 'login':
+            require_once 'classes/login_doc.php';
+            $view = new LoginDoc($data);
+            $view->show();
+            break;
+        case 'register':
+            break;
         
         default:
         var_dump('NOO!');

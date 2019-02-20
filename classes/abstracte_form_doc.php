@@ -29,13 +29,17 @@ abstract class FormDoc extends basicDoc
         echo "</form>";   
     }
 
-    protected function formField(String $type, String $name, String $placeHolder,String $value) 
+    protected function formField(String $type, String $name, String $placeHolder,String $value,String $error) 
     {
         echo "<div class='form-group'>
         <input class='form-control' type='". $type ."' name='". $name ."' placeholder='". $placeHolder ."' value='". $value ."'>
-        <small class='form-text text-danger'>". getArrayVar($this->data, 'nameErr') ."</small>
+        <small class='form-text text-danger'>". $error ."</small>
         </div>";
+    }
 
+    protected function hiddenFormField()
+    {
+        echo"<input type='hidden' name='page' value='".$this->data['page']."'>";
     }
 
     protected function formButton(String $buttonText, String $buttonType = "primary")
