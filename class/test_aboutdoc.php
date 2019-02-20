@@ -1,5 +1,5 @@
 <?php
-include_once "home_doc.php";
+include_once "about_doc.php";
 
 $data = array('page' => 'home');
 $data['menuLeft'] = array('home' => 'Home', 'about' => 'About', 'contact' => 'Contact', 'products' => 'Products', 'top5' => 'Top 5');
@@ -13,5 +13,5 @@ if (true) {
     $data['menuRight'] = array('login' => 'Login', 'register' => 'Register');
 }
 
-$view = new HomeDoc($data);
+$view = new aboutDoc($data);
 $view->show();

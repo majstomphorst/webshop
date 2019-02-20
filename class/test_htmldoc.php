@@ -1,7 +1,5 @@
 <?php
-  include_once "html_doc.php";
+include_once "html_doc.php";
 
-  $view = new htmlDoc();
-  $view  -> show();
-
-?>
+$view = new htmlDoc();
+$view->show();
