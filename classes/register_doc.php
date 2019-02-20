@@ -5,25 +5,34 @@ require_once "abstracte_form_doc.php";
 
 class RegisterDoc extends FormDoc
 {
-    public $title = '';
-    public $fields = array();
 
-    public function __construct($mydata, $title = 'abc',$fields)
+
+    public function __construct($mydata)
     {
         // pass the data on to our parent class (basicDoc)
         parent::__construct($mydata);
-        $this->title = $title;
-        $this->fields = $fields;
     }
 
 
     protected function mainContent() 
     {
-        $this->formTitle($this->title);
-        foreach ($this->fields as $key => $value) {
-            $this->formField($value['type'],$value['name'],$value['placeHolder'],$value['value']);
-        }
-        $this->formButton("Register");
+        $this->formTitle($this->data['page']);
+        $this->startForm();
+        $this->formField("text","name","Your email...",
+                            getArrayVar($this->data, 'name'),
+                            getArrayVar($this->data, 'nameErr'));
+        $this->formField("email","email","Your email...",
+                            getArrayVar($this->data, 'email'),
+                            getArrayVar($this->data, 'emailErr'));
+        $this->formField("password","password","Your password...",
+                            getArrayVar($this->data, 'password'),
+                            getArrayVar($this->data, 'passwordErr'));
+        $this->formField("password","passwordCheck","Your password again...",
+                            getArrayVar($this->data, 'passwordCheck'),
+                            getArrayVar($this->data, 'passwordCheckErr'));
+        $this->formErrorLine(getArrayVar($this->data, 'passwordNotEqualErr'));
+        $this->hiddenFormField();
+        $this->formButton("submit");
         
     }
 

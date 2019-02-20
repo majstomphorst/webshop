@@ -183,6 +183,9 @@ function showResponsePage($data)
             $view->show();
             break;
         case 'register':
+            require_once 'classes/register_doc.php';
+            $view = new RegisterDoc($data);
+            $view->show();
             break;
         
         default:

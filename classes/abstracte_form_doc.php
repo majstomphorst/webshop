@@ -52,4 +52,8 @@ abstract class FormDoc extends basicDoc
         echo "<h5 class='card-title text-center'>$title</h5>
         <hr>";
     }
+    protected function formErrorLine($message)
+    {
+        echo "<small class='form-text text-danger'>". $message ."</small>";
+    }
 }
