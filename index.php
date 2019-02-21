@@ -187,6 +187,11 @@ function showResponsePage($data)
             $view = new Top5Doc($data);
             $view->show();
             break;
+        case 'cart':
+            require_once 'classes/cart_doc.php';
+            $view = new CartDoc($data);
+            $view->show();
+            break;
         case 'login':
             require_once 'classes/login_doc.php';
             $view = new LoginDoc($data);
@@ -197,12 +202,16 @@ function showResponsePage($data)
             $view = new RegisterDoc($data);
             $view->show();
             break;
-
+        case 'detailProduct':
+            require_once 'classes/detail_product_doc.php';
+            $view = new DetailProductDoc($data);
+            $view->show();
+            break;
         default:
             var_dump('NOO!');
-            beginDocument();
-            showHeadSection();
-            showBodySection($data);
+            // beginDocument();
+            // showHeadSection();
+            // showBodySection($data);
             break;
     }
 

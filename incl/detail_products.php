@@ -33,7 +33,7 @@ echo '<div class="container">
                                 <h3>&#8364; '. money_format('%.2n', $product['price']) . '</h3>
                                 <hr>';
                                 if ($data['loggedIn']) {
-                                    showReatingPanel();
+                                    $this->showReatingPanel();
                                 }
 
                             echo'<form action="index.php" method="post">
