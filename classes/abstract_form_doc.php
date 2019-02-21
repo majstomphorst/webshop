@@ -39,7 +39,7 @@ abstract class FormDoc extends basicDoc
 
     protected function hiddenFormField()
     {
-        echo"<input type='hidden' name='page' value='".$this->data['page']."'>";
+        echo"<input type='hidden' name='page' value='".$this->model->requested_page."'>";
     }
 
     protected function formButton(String $buttonText, String $buttonType = "primary")

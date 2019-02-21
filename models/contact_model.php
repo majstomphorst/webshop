@@ -27,8 +27,8 @@ class ContactModel extends PageModel
         if (empty($this->email)) {$this->emailErr = "Email is required";}
         if (empty($this->text)) {$this->textErr = "Text is required";}
 
-        if (!isset($this->nameErr) && !isset($this->emailErr) &&
-            !isset($this->textErr)) {
+        if (empty($this->nameErr) && empty($this->emailErr) &&
+            empty($this->textErr)) {
             $this->valid = true;
         }
     }

@@ -5,7 +5,7 @@ class PageModel
 {
     public $requested_page;
     protected $requested_type;
-    protected $isPost;
+    public $isPost;
     public $menuLeft;
     public $menuRight;
     public $loggedIn;
@@ -26,7 +26,7 @@ class PageModel
     public function getRequestedPage()
     {
         $this->requested_type = $_SERVER['REQUEST_METHOD'];
-        $this->isPost = $requested_type == 'POST';
+        $this->isPost = $this->requested_type == 'POST';
         if ($this->isPost) {
             $this->requested_page = getPostVar('page', 'home');
         } else {
