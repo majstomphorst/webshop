@@ -177,6 +177,11 @@ function showResponsePage($data)
             $view = new ContactDoc($data);
             $view->show();
             break;
+        case 'products':
+            require_once 'classes/products_doc.php';
+            $view = new ProductsDoc($data);
+            $view->show();
+            break;
         case 'login':
             require_once 'classes/login_doc.php';
             $view = new LoginDoc($data);
@@ -189,7 +194,7 @@ function showResponsePage($data)
             break;
         
         default:
-        var_dump('NOO!');
+            var_dump('NOO!');
             beginDocument();
             showHeadSection();
             showBodySection($data);

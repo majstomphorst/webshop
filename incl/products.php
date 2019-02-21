@@ -1,6 +1,7 @@
 <?php
 require_once 'incl/money_format.php';
 
+
 function showProducts($data)
 {
     $products = array();

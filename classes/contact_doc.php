@@ -9,7 +9,7 @@ class ContactDoc extends FormDoc
         // pass the data on to our parent class (basicDoc)
         parent::__construct($mydata);
     }
-
+    
 
     protected function mainContent() 
     {
@@ -17,6 +17,7 @@ class ContactDoc extends FormDoc
             $this->message();
             unset($this->data['name'],$this->data['email'],$this->data['text'],$this->data['valid']);
         }
+
         $this->formTitle($this->data['page']);
         $this->startForm();
         $this->formField("text","name","Your name...",
@@ -28,7 +29,9 @@ class ContactDoc extends FormDoc
         $this->formField("","text","Your text...",
                             getArrayVar($this->data, 'text'),
                             getArrayVar($this->data, 'textErr'));
+
         $this->hiddenFormField();
+
         $this->formButton("submit");
     }
 
