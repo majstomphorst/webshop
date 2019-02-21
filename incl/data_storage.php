@@ -34,12 +34,12 @@ function validateUser(String $email, String $password)
 
     // if not set no user == false
     if (!isset($UserInfo)) {
-        return false;
+        return null;
     }
     if ($UserInfo['password'] == $password) {
-        return true;
+        return $UserInfo;
     }
-    return false;
+    return null;
 }
 
 /**

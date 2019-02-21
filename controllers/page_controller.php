@@ -30,7 +30,24 @@ class PageController
                 $controller = new ContactController($this->model);
                 $controller->handleContactRequest();
                 break;
+            case 'login':
+                require_once "controllers/login_controller.php";
+                $controller = new LoginController($this->model);
+                $controller->handelLoginRequest();
+               
+
+
+                // require_once 'classes/login_doc.php';
+                // $view = new LoginDoc($data);
+                // $view->show();
+                break;
+
+
+
             case 'products':
+                // require_once 'controllers/product_controller.php';
+                // $controller = new ProductController($this->model);
+                // $controller->
                 require_once 'classes/products_doc.php';
                 $view = new ProductsDoc($data);
                 $view->show();
@@ -47,6 +64,8 @@ class PageController
                 break;
             case 'login':
                 require_once 'classes/login_doc.php';
+
+                
                 $view = new LoginDoc($data);
                 $view->show();
                 break;

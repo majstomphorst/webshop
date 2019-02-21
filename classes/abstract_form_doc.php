@@ -6,7 +6,12 @@ require_once 'basic_doc.php';
  */
 abstract class FormDoc extends basicDoc
 {
-
+    public function __construct($model)
+    {
+        // pass the data on to our parent class (basicDoc)
+        parent::__construct($model);
+    }
+    
     protected function startContainer()
     {
         echo "<div class='col-sm-9 col-md-7 col-lg-5 mx-auto'>

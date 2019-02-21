@@ -5,6 +5,11 @@ class basicDoc extends htmlDoc
 {
     protected $model;
 
+    public function __construct($model)
+    {
+        $this->model = $model;
+    }
+
     // Override function from htmlDoc
     protected function headerContent()
     {
@@ -24,11 +29,6 @@ class basicDoc extends htmlDoc
         $this->endContainer();
         $this->bodyFooter();
         $this->inclScripts();
-    }
-
-    public function __construct($model)
-    {
-        $this->model = $model;
     }
 
     protected function title()
