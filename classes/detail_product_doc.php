@@ -43,7 +43,7 @@ class DetailProductDoc extends productDoc
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">
                                     <input type="hidden" name="order[action]" value="addToCart">
-                                    <button value="' . $product['id'] . '" type="submit" name="order[productId]" class="' . $optionToBuy . 'btn btn-success buyButton">Buy</button>
+                                    <button value="'.$product['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $optionToBuy .'>Buy</button>
                                 </form>
                             </div>
                         </div>
