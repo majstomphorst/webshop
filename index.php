@@ -2,6 +2,16 @@
 require_once 'incl/data_storage.php';
 require_once 'incl/session_manager.php';
 
+require_once 'controllers/page_controller.php';
+
+$pageController = new PageController();
+
+$pageController->handleRequest();
+
+// romve everything
+exit();
+
+
 // main app
 $page = getRequestedPage();
 // proces request
@@ -117,7 +127,6 @@ function procesRequest($page)
             $data['top5'] = getTop5Sold();
             $page = 'top5';
             break;
-
         case 'ajax':
             require_once 'incl/ajax.php';
 
@@ -144,7 +153,6 @@ function procesRequest($page)
     return $data;
 
 }
-
 
 // returns the name(string) of the requested page
 function getRequestedPage()
@@ -214,9 +222,6 @@ function showResponsePage($data)
 
 }
 
-
-
-
 // get the form data that is posted to the server or returns the default
 function getPostVar($key, $default = '')
 {
@@ -279,31 +284,6 @@ function showContent($data)
             showError("Page [" . $data['page'] . "] not found."); 
             break;
     }
-}
-
-
-// function messagePage($data)
-// {
-//     if (isset($data['errorMessage'])) {
-//             echo '
-//             <div class="container">
-//             <div class="alert alert-info" role="alert">
-//             <strong>Message:</strong><br>
-//                 '.$data['errorMessage'].'
-//             </div>
-//             </div>';
-//     }
-   
-// }
-
-
-
-
-
-
-function showError($message)
-{
-    echo $message;
 }
 
 function test_input($data) {

@@ -3,19 +3,19 @@ require_once "abstract_form_doc.php";
 
 class ContactDoc extends FormDoc
 {
-
-    public function __construct($mydata)
+    
+    public function __construct(ContactModel $model)
     {
         // pass the data on to our parent class (basicDoc)
-        parent::__construct($mydata);
+        parent::__construct($model);
     }
     
 
     protected function mainContent() 
     {
-        if (getArrayVar($this->data,'valid',false)) {
+        if ($this->model->valid) {
             $this->message();
-            unset($this->data['name'],$this->data['email'],$this->data['text'],$this->data['valid']);
+            unset($this->model->name,$this->model->email,$this->model->text,$this->model->valid);
         }
 
         $this->formTitle($this->data['page']);

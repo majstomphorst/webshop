@@ -3,7 +3,7 @@ require_once 'html_doc.php';
 
 class basicDoc extends htmlDoc
 {
-    protected $data;
+    protected $model;
 
     // Override function from htmlDoc
     protected function headerContent()
@@ -18,7 +18,7 @@ class basicDoc extends htmlDoc
     protected function bodyContent()
     {
         $this->bodyHeader();
-        $this->mainMenu($this->data);
+        $this->mainMenu();
         $this->startContainer();
         $this->mainContent();
         $this->endContainer();
@@ -26,14 +26,14 @@ class basicDoc extends htmlDoc
         $this->inclScripts();
     }
 
-    public function __construct($mydata)
+    public function __construct($model)
     {
-        $this->data = $mydata;
+        $this->model = $model;
     }
 
     protected function title()
     {
-        echo "<title>My website - " . $this->data['page'] . "</title>";
+        echo "<title>My website - " . $this->model->requested_page . "</title>";
     }
 
     private function metaAuthor()
@@ -59,7 +59,7 @@ class basicDoc extends htmlDoc
         return 0;
     }
 
-    private function mainMenu($data)
+    private function mainMenu()
     {
         echo "<nav class='navbar navbar-expand-lg navbar-light bg-light static-top shadow'>
             <div class='navbar-nav'>
@@ -68,24 +68,24 @@ class basicDoc extends htmlDoc
             </a>
             <a class='navbar-brand' href='#'>Educom</a>
             <ul class='navbar-nav mr-auto'>";
-        foreach ($data['menuLeft'] as $pageLink => $buttonText) {
-            $this->showMenuItem($pageLink, $buttonText, $data['page']);
+        foreach ($this->model->menuLeft as $pageLink => $buttonText) {
+            $this->showMenuItem($pageLink, $buttonText);
         }
         echo "</ul>
             </div>
             <div class='navbar-nav ml-auto'>
             <ul class='navbar-nav mr-auto'>";
-        foreach ($data['menuRight'] as $pageLink => $buttonText) {
-            $this->showMenuItem($pageLink, $buttonText, $data['page']);
+        foreach ($this->model->menuRight as $pageLink => $buttonText) {
+            $this->showMenuItem($pageLink, $buttonText);
         }
         echo "</ul>
             </div>
             </nav>";
     }
 
-    private function showMenuItem($pageLink, $buttonText, $currentPage)
+    private function showMenuItem($pageLink, $buttonText)
     {
-        if ($pageLink == $currentPage) {
+        if ($pageLink == $this->model->requested_page) {
             echo "<li class='nav-item'>
                 <a class='nav-link nav-link active' href='index.php?page=" . $pageLink . "'>" . $buttonText . "</a>
                 </li>";
