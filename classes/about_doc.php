@@ -12,7 +12,7 @@ class aboutDoc extends basicDoc
     // Override function from basicDoc
     protected function mainContent()
     {
-        echo "<h1 class='font-weight-light text-center'>Your ar on page: ". ucfirst($this->data['page']) ."</h1>
+        echo "<h1 class='font-weight-light text-center'>Your ar on page: ". ucfirst($this->model->requested_page) ."</h1>
         <p>
             Lorem Ipsum is slechts een proeftekst uit het drukkerij- en zetterijwezen. Lorem Ipsum is de standaard
             proeftekst in deze bedrijfstak sinds de 16e eeuw, toen een onbekende drukker een zethaak met letters nam en
