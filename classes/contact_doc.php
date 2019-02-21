@@ -11,11 +11,6 @@ class ContactDoc extends FormDoc
     
     protected function mainContent() 
     {
-        if ($this->model->valid) {
-            $this->message();
-            // FIXME: dit mag hier dus niet max mutaties moet in de model plaats vinden
-            unset($this->model->name,$this->model->email,$this->model->text,$this->model->valid);
-        }
         // $this->model->$requested_page
         $this->formTitle($this->model->requested_page);
         $this->startForm();
