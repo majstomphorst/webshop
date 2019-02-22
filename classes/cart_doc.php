@@ -31,8 +31,8 @@ class CartDoc extends BasicDoc
             </table>
             <form action="index.php" method="post">
                 <input type="hidden" name="page" value="cart">
-                <input type="hidden" name="order[action]" value="placeOrder">
-                <button type="submit" name="order[productId]" class="btn btn-success">Order!</button>
+                <input type="hidden" name="action" value="placeOrder">
+                <button type="submit" name="productId" class="btn btn-success">Order!</button>
             </form>';
     }
 
@@ -47,8 +47,8 @@ class CartDoc extends BasicDoc
                 <div class="col-sm">
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
-                        <input type="hidden" name="order[action]" value="removeFromCart">
-                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="order[productId]" class="btn btn-outline-danger btn-block">&#8678;</button>
+                        <input type="hidden" name="action" value="removeFromCart">
+                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="productId" class="btn btn-outline-danger btn-block">&#8678;</button>
                     </form>
                 </div>
                 <div class="col-sm col-5">
@@ -58,8 +58,8 @@ class CartDoc extends BasicDoc
                 <div class="col-sm">
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
-                        <input type="hidden" name="order[action]" value="addToCart">
-                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="order[productId]" class="btn btn-outline-success btn-block">&#8680;</button>
+                        <input type="hidden" name="action" value="addToCart">
+                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="productId" class="btn btn-outline-success btn-block">&#8680;</button>
                     </form>
                 </div>
             </div>
