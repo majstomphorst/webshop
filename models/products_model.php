@@ -15,14 +15,24 @@ class ProductsModel extends PageModel
 
     public function getProducts() 
     {
-        $this->products = getProducts();
+        try {
+            $this->products = getProducts();
+        } catch (\Throwable $th) {
+            $data['errorMessage'] = $th->getMessage();
+        }
     }
 
     public function getProductById()
     {
-        $this->productId = getUrlVar('id');
-        if ($this->productId) {
-            $this->products = getProductById($this->productId );
+        try {
+            $this->productId = getUrlVar('id');
+            if (!empty($this->productId)) {
+                $this->products = getProductById($this->productId);
+            }
+        } catch (\Throwable $th) {
+            $data['errorMessage'] = $th->getMessage();
         }
+
     }
+
 }

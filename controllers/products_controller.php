@@ -24,8 +24,14 @@ class ProductsController
     {
         $this->model->getProductById();
         $view = new DetailProductDoc($this->model);
-        $view->show();
-
+        if (count($this->model->products) <= 0) {
+            
+            $this->model->requested_page = "products";
+            $this->handelProductsRequest();
+        } else {
+            $view->show();
+        }
+        
     }
 
 

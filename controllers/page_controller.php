@@ -73,8 +73,6 @@ class PageController
                 break;
             case 'login':
                 require_once 'classes/login_doc.php';
-
-                
                 $view = new LoginDoc($data);
                 $view->show();
                 break;
