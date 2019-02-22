@@ -7,7 +7,6 @@ require_once "classes/cart_doc.php";
 
 class ProductsController
 {
-
     private $model;
 
     public function __construct($pageModel)
