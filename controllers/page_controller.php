@@ -31,15 +31,14 @@ class PageController
                 $controller->handleContactRequest();
                 break;
             case 'login':
-                require_once "controllers/login_controller.php";
-                $controller = new LoginController($this->model);
-                $controller->handelLoginRequest();
-               
-
-
-                // require_once 'classes/login_doc.php';
-                // $view = new LoginDoc($data);
-                // $view->show();
+                require_once "controllers/user_controller.php";
+                $controller = new UserController($this->model);
+                $controller->handleLoginRequest();
+                break;
+            case 'logout':
+                require_once "controllers/user_controller.php";
+                $controller = new UserController($this->model);
+                $controller->handleLogOutRequest();
                 break;
 
 

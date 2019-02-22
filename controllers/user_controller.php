@@ -3,7 +3,7 @@ require_once "models/user_model.php";
 require_once "classes/login_doc.php";
 require_once "classes/home_doc.php";
 
-class LoginController
+class UserController
 {
     private $model;
 
@@ -12,7 +12,7 @@ class LoginController
         $this->model = new UserModel($pageModel);
     }
 
-    public function handelLoginRequest()
+    public function handleLoginRequest()
     {
         $view = new LoginDoc($this->model);
 
@@ -26,7 +26,7 @@ class LoginController
 
                     if ($this->model->validateUserAgainstDb()) {
                         $this->model->loginUser();
-
+                        
                         $view = new HomeDoc($this->model);
                     } else {
                         $this->model->LoginErr = "Email and password combination invalid";
@@ -37,6 +37,13 @@ class LoginController
                 $this->model->errorMessage = $th->getMessage();
             }
         }
+
+        $view->show();
+    }
+
+    public function handleLogOutRequest() {
+        $this->model->logoutUser();
+        $view = new HomeDoc($this->model);
         $view->show();
     }
 

@@ -47,5 +47,11 @@ class UserModel extends PageModel
     
     public function loginUser() {
         login($this->userInfo);
+        $this->generateMenu();
+    }
+    
+    public function logoutUser() {
+        logout();
+        $this->generateMenu();
     }
 }
