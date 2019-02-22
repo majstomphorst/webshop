@@ -1,6 +1,7 @@
 <?php
 require_once "models/user_model.php";
 require_once "classes/login_doc.php";
+require_once "classes/register_doc.php";
 require_once "classes/home_doc.php";
 
 class UserController
@@ -41,7 +42,32 @@ class UserController
         $view->show();
     }
 
-    public function handleLogOutRequest() {
+    public function handelRegisterRequest() 
+    {
+        $view = new RegisterDoc($this->model);
+
+        if ($this->model->isPost) {
+
+            $this->model->validateRegisterForm();
+
+            // check if the register form is complete
+            if ($this->model->valid) {
+
+                $this->model->registerUser();
+
+                if ($this->model->dbValid) {
+                    // update model 
+                    $this->model->requested_page = 'login';
+                    $view = new LoginDoc($this->model);
+
+                } // back to register
+            }
+        }
+        $view->show();
+    }
+
+    public function handleLogOutRequest() 
+    {
         $this->model->logoutUser();
         $view = new HomeDoc($this->model);
         $view->show();

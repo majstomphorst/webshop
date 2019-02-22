@@ -40,6 +40,13 @@ class PageController
                 $controller = new UserController($this->model);
                 $controller->handleLogOutRequest();
                 break;
+            case 'register':
+                require_once "controllers/user_controller.php";
+                $controller = new UserController($this->model);
+                $controller->handelRegisterRequest();
+                break;
+
+
 
 
 
