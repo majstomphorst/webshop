@@ -14,14 +14,14 @@ class ProductsController
         $this->model = new ProductsModel($pageModel);
     }
 
-    public function handelProductsRequest()
+    public function handleProductsRequest()
     {
         $this->model->getProducts();
         $view = new ProductsDoc($this->model);
         $view->show();
     }
 
-    public function handelDetailProductsRequest()
+    public function handleDetailProductsRequest()
     {
         $this->model->getProductById();
         $view = new DetailProductDoc($this->model);
@@ -34,14 +34,20 @@ class ProductsController
         }
     }
 
-    public function handelCartRequest()
+    public function handleCartRequest()
     {
         $this->model->handleCartActions();
-
         $this->model->prepareShoppingCart();
         $view = new CartDoc($this->model);
         $view->show();
     }
+    
+    public function handleTop5Request()
+    {
+
+    }
+
+
         
 }
 
