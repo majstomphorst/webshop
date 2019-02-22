@@ -3,47 +3,47 @@ require_once "abstract_product_doc.php";
 
 class DetailProductDoc extends productDoc
 {
-    public function __construct($mydata)
+    public function __construct($model)
     {
         // pass the data on to our parent class (basicDoc)
-        parent::__construct($mydata);
+        parent::__construct($model);
     }
 
     public function mainContent()
     {
-        $product = array();
-        if (!empty($this->data['product'])) {
-            $product = $this->data['product'];
+        if (!isset($this->model->products)){
+            echo 'no products found.';
+            return;
         }
 
-        $optionToBuy = '';
-        if (!$this->data['loggedIn']) {
-            $optionToBuy = 'disabled ';
+        // if the user is login activate buy option 
+        if ($this->model->loggedIn) {
+            $this->model->optionToBuy = '';
         }
 
         echo '
                 <div class="row">
                     <div class="col-4">
-                        <img src="./assets/images/' . $product['image_name'] . '.png" class="img-fluid" alt="Responsive image">
+                        <img src="./assets/images/' . $this->model->products['image_name'] . '.png" class="img-fluid" alt="Responsive image">
                     </div>
                     <div class="col-8">
                         <div class="card">
                             <div class="card-header">
-                                <h2>' . $product['name'] . ' <span class="badge badge-secondary">Exclusive</span></h2>
+                                <h2>' . $this->model->products['name'] . ' <span class="badge badge-secondary">Exclusive</span></h2>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-textl">' . $product['description'] . '</h5>
+                                <h5 class="card-textl">' . $this->model->products['description'] . '</h5>
                                 <hr>
-                                <h3>&#8364; ' . money_format('%.2n', $product['price']) . '</h3>
+                                <h3>&#8364; ' . money_format('%.2n', $this->model->products['price']) . '</h3>
                                 <hr>';
-        if ($this->data['loggedIn']) {
+        if ($this->model->loggedIn) {
             $this->showReatingPanel();
         }
 
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">
                                     <input type="hidden" name="order[action]" value="addToCart">
-                                    <button value="'.$product['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $optionToBuy .'>Buy</button>
+                                    <button value="'.$this->model->products['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                                 </form>
                             </div>
                         </div>

@@ -45,19 +45,22 @@ class PageController
                 $controller = new UserController($this->model);
                 $controller->handelRegisterRequest();
                 break;
-
-
-
-
-
             case 'products':
-                // require_once 'controllers/product_controller.php';
-                // $controller = new ProductController($this->model);
-                // $controller->
-                require_once 'classes/products_doc.php';
-                $view = new ProductsDoc($data);
-                $view->show();
+                require_once "controllers/products_controller.php";
+                $controller = new ProductsController($this->model);
+                $controller->handelProductsRequest();
                 break;
+            case 'detailProduct':
+                require_once "controllers/products_controller.php";
+                $controller = new ProductsController($this->model);
+                $controller->handelDetailProductsRequest();
+                break;
+
+
+
+
+
+     
             case 'top5':
                 require_once 'classes/top5_doc.php';
                 $view = new Top5Doc($data);

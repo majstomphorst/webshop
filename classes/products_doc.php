@@ -3,11 +3,10 @@ require_once "abstract_product_doc.php";
 
 class ProductsDoc extends ProductDoc
 {
-
-    public function __construct($mydata)
+    public function __construct($model)
     {
         // pass the data on to our parent class (basicDoc)
-        parent::__construct($mydata);
+        parent::__construct($model);
     }
 
     protected function startContainer() {
@@ -22,28 +21,25 @@ class ProductsDoc extends ProductDoc
 
     protected function mainContent()
     {
-        $products = array();
-        if (isset($this->data['products'])){
-            $products = $this->data['products'];
-        } else {
+        if (!isset($this->model->products)){
             echo 'no products found.';
             return;
         }
 
-        $optionToBuy = '';
-        if (!$this->data['loggedIn']) {
-            $optionToBuy = 'disabled';
+        // if the user is login activate buy option 
+        if ($this->model->loggedIn) {
+            $this->model->optionToBuy = '';
         }
         
         $this->startContainer();
-        foreach ($products as $product) {
-            $this->showProductCard($product,$optionToBuy);
+        foreach ($this->model->products as $product) {
+            $this->showProductCard($product);
         }
         $this->endContainer();
 
     }
 
-    private function showProductCard($product, $optionToBuy)
+    private function showProductCard($product)
     {
         setlocale(LC_MONETARY, 'nl_NL');
         
@@ -58,11 +54,11 @@ class ProductsDoc extends ProductDoc
                     <form action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="order[action]" value="addToCart">
-                        <button value="'.$product['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $optionToBuy .'>Buy</button>
+                        <button value="'.$product['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                     </form>';
 
                     // check if a user in loggein 
-                    if(!$optionToBuy) {
+                    if(!$this->model->optionToBuy) {
                         $this->showReatingPanel();
                     }
                     
