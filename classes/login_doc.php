@@ -1,7 +1,7 @@
 <?php
 
 require_once "abstract_form_doc.php";
-require_once "models/login_model.php";
+require_once "models/user_model.php";
 
 class LoginDoc extends FormDoc
 {

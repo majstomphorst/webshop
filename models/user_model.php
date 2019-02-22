@@ -3,7 +3,7 @@ require_once "models/page_model.php";
 require_once "incl/data_storage.php";
 require_once "incl/session_manager.php";
 
-class LoginModel extends PageModel 
+class UserModel extends PageModel 
 {
     public $email = '';
     public $password = '';

@@ -1,5 +1,5 @@
 <?php
-require_once "models/login_model.php";
+require_once "models/user_model.php";
 require_once "classes/login_doc.php";
 require_once "classes/home_doc.php";
 
@@ -9,7 +9,7 @@ class LoginController
 
     public function __construct($pageModel)
     {
-        $this->model = new LoginModel($pageModel);
+        $this->model = new UserModel($pageModel);
     }
 
     public function handelLoginRequest()
