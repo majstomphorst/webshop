@@ -3,10 +3,10 @@ require_once 'classes/basic_doc.php';
 
 class CartDoc extends BasicDoc
 {
-    public function __construct($mydata)
+    public function __construct($model)
     {
         // pass the data on to our parent class (basicDoc)
-        parent::__construct($mydata);
+        parent::__construct($model);
     }
 
     public function mainContent()
@@ -22,8 +22,8 @@ class CartDoc extends BasicDoc
                 </tr>
                 </thead>
                 <tbody>';
-        if (array_key_exists('cart', $this->data)) {
-            foreach ($this->data['cart'] as $cartRow) {
+        if (array_key_exists('cart', $this->model->cart)) {
+            foreach ($this->model->cart['cart'] as $cartRow) {
                 $this->showRow($cartRow);
             }
         }

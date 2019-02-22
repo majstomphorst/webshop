@@ -55,6 +55,12 @@ class PageController
                 $controller = new ProductsController($this->model);
                 $controller->handelDetailProductsRequest();
                 break;
+            case 'cart':
+                require_once "controllers/products_controller.php";
+                $controller = new ProductsController($this->model);
+                $controller->handelCartRequest();
+                break;
+
 
 
 

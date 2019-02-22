@@ -42,8 +42,8 @@ class DetailProductDoc extends productDoc
 
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">
-                                    <input type="hidden" name="order[action]" value="addToCart">
-                                    <button value="'.$this->model->products['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
+                                    <input type="hidden" name="action" value="addToCart">
+                                    <button value="'.$this->model->products['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                                 </form>
                             </div>
                         </div>

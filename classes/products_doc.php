@@ -53,8 +53,8 @@ class ProductsDoc extends ProductDoc
                     <div class="card-footer bg-transparent border-success">' . money_format('%.2n', $product['price']) . '</div>
                     <form action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
-                        <input type="hidden" name="order[action]" value="addToCart">
-                        <button value="'.$product['id'].'" type="submit" name="order[productId]" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
+                        <input type="hidden" name="action" value="addToCart">
+                        <button value="'.$product['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                     </form>';
 
                     // check if a user in loggein 
