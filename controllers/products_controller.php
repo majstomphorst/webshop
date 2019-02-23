@@ -10,7 +10,7 @@ class ProductsController
 {
     private $model;
 
-    public function __construct($pageModel)
+    public function __construct(PageModel $pageModel)
     {
         $this->model = new ProductsModel($pageModel);
     }
@@ -53,5 +53,3 @@ class ProductsController
 
         
 }
-
-

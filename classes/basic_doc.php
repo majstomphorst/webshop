@@ -5,7 +5,7 @@ class basicDoc extends htmlDoc
 {
     protected $model;
 
-    public function __construct($model)
+    public function __construct(PageModel $model)
     {
         $this->model = $model;
     }

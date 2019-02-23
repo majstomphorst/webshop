@@ -3,7 +3,7 @@ require_once "abstract_product_doc.php";
 
 class DetailProductDoc extends productDoc
 {
-    public function __construct($model)
+    public function __construct(PageModel $model)
     {
         // pass the data on to our parent class (basicDoc)
         parent::__construct($model);

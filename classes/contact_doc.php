@@ -3,7 +3,7 @@ require_once "abstract_form_doc.php";
 
 class ContactDoc extends FormDoc
 {
-    public function __construct($model)
+    public function __construct(PageModel $model)
     {
         // pass the data on to our parent class (basicDoc)
         parent::__construct($model);

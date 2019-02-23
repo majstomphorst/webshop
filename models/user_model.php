@@ -3,6 +3,13 @@ require_once "models/page_model.php";
 require_once "incl/data_storage.php";
 require_once "incl/session_manager.php";
 
+/**
+* 
+* This needs a description
+* 
+*
+* 
+*/
 class UserModel extends PageModel
 {
     public $name = '';
