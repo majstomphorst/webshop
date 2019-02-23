@@ -3,10 +3,10 @@ include_once "classes/basic_doc.php";
 
 class Top5Doc extends basicDoc
 {
-    public function __construct($mydata)
+    public function __construct($model)
     {
         // pass the data on to our parent class (basicDoc)
-        parent::__construct($mydata);
+        parent::__construct($model);
     }
 
 
@@ -23,7 +23,7 @@ class Top5Doc extends basicDoc
             </thead>
         <tbody>';
         $rank = 1;
-        foreach ($this->data['top5'] as $product) {
+        foreach ($this->model->products as $product) {
             $this->showRow($product, $rank);
             $rank++;
         }

@@ -3,6 +3,7 @@ require_once "models/products_model.php";
 require_once "classes/products_doc.php";
 require_once "classes/detail_product_doc.php";
 require_once "classes/cart_doc.php";
+require_once "classes/top5_doc.php";
 
 
 class ProductsController
@@ -44,7 +45,9 @@ class ProductsController
     
     public function handleTop5Request()
     {
-
+        $this->model->getTop5();
+        $view = new Top5Doc($this->model);
+        $view->show();
     }
 
 

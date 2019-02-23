@@ -17,7 +17,7 @@ class ProductsModel extends PageModel
         parent::__construct($model);
     }
 
-    public function getProducts() 
+    public function getProducts()
     {
         try {
             $this->products = getProducts();
@@ -29,16 +29,17 @@ class ProductsModel extends PageModel
     public function getProductById()
     {
         try {
+
             $this->productId = test_input(getUrlVar('id'));
             if (!empty($this->productId)) {
                 $this->products = getProductById($this->productId);
-            } 
+            }
         } catch (\Throwable $th) {
             $data['errorMessage'] = $th->getMessage();
         }
     }
 
-        /**
+    /**
      * mutates the cart
      * 1. adds a new product to the cart with a order amount of 1
      * 2. adds 1 to the already order product
@@ -64,7 +65,7 @@ class ProductsModel extends PageModel
                     mutateToCart($this->productId, -1);
                     break;
                 case 'placeOrder':
-                    $orderInfo = prepareOrderInfoForStorage();
+                    $orderInfo = $this->prepareOrderInfoForStorage();
                     $userId = getLoggedInUserId();
                     if (storeOrder($orderInfo, $userId)) {
                         removeCart();
@@ -75,13 +76,13 @@ class ProductsModel extends PageModel
     }
 
     /**
-    * reads the database and looks up a user by there email
-    *
-    * @param   String email to look up in the database
-    * @return  associtive array['name','email','password']
-    * 
-    */
-    function prepareShoppingCart()
+     * reads the database and looks up a user by there email
+     *
+     * @param   String email to look up in the database
+     * @return  associtive array['name','email','password']
+     *
+     */
+    public function prepareShoppingCart()
     {
         $cart = getCart();
         $cartRows = array();
@@ -90,9 +91,43 @@ class ProductsModel extends PageModel
             $cartRow = array('product' => getProductById($productId));
             $cartRow['amount'] = intval($amount);
             $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
-            array_push($cartRows ,$cartRow);
+            array_push($cartRows, $cartRow);
         }
         $this->cart = array('cart' => $cartRows);
+    }
+
+    public function getTop5()
+    {
+        $this->products = getTop5Sold();
+    }
+
+    /**
+     * collect all the information needed to store the order in the db
+     *
+     * @return associtive orderInfo array[0 => array['productId','amount','unit_price'],
+     *                                    1 => array[],
+     *                                    'total_price']
+     *
+     */
+    public function prepareOrderInfoForStorage()
+    {
+
+        $cart = getCart();
+        $orderInfo = array();
+        $total_price = 0;
+
+        foreach ($cart as $productId => $amount) {
+            $productInfo = getProductById($productId);
+
+            $cartRow['productId'] = $productId;
+            $cartRow['amount'] = $amount;
+            $cartRow['unit_price'] = $productInfo['price'];
+            $total_price += $amount * $productInfo['price'];
+
+            array_push($orderInfo, $cartRow);
+        }
+        $orderInfo['total_price'] = $total_price;
+        return $orderInfo;
     }
 
 }

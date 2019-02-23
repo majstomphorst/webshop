@@ -177,11 +177,11 @@ function storeOrder($orderInfo, $userId)
                 throw new Exception("Insertion order_product failed: " . mysqli_error($conn), 4);
             }
         }
+        return true;
 
     } finally {
         mysqli_close($conn);
     }
-    return true;
 
 }
 
