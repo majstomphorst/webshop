@@ -145,6 +145,8 @@ function getProductById($productId)
 */
 function storeOrder($orderInfo, $userId)
 {
+    //TODO: this function needs to be fix!!!
+    
 
     $conn = connectToEducomDatabase();
     $total_price = $orderInfo['total_price'];
