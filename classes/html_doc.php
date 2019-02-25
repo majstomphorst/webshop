@@ -1,6 +1,7 @@
 <?php
+require_once "./classes/response_doc.php";
 
-class htmlDoc
+class htmlDoc extends ResponseDoc 
 {
     public function show()
     {

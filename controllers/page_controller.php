@@ -65,6 +65,11 @@ class PageController
                 $controller = new ProductsController($this->model);
                 $controller->handleTop5Request();
                 break;
+            case 'ajax':
+                require_once "controllers/ajax_controller.php";
+                $controller = new AjaxController($this->model);
+                $controller->handleAjaxRequest();
+                break;
         }
     }
 }

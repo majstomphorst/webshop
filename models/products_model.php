@@ -2,6 +2,7 @@
 require_once "incl/database.php";
 require_once "incl/session_manager.php";
 
+
 class ProductsModel extends PageModel
 {
     public $products = array();
@@ -10,6 +11,11 @@ class ProductsModel extends PageModel
 
     public $actionCart = null;
     public $cart = array();
+
+    private $actionAjax = '';
+    private $productIds = array();
+    private $userRatings = array();
+    private $avgRatings = array();
 
     public function __construct(PageModel $model)
     {
@@ -128,6 +134,45 @@ class ProductsModel extends PageModel
         }
         $orderInfo['total_price'] = $total_price;
         return $orderInfo;
+    }
+
+    public function handleAjaxActions()
+    {
+        $this->actionAjax = test_input(getPostVar('action'));
+
+        switch ($this->actionAjax) {
+            case 'updateRating':
+                $this->productId = test_input(getPostVar('productId'));
+                $this->rating = test_input(getPostVar('rating'));
+                updateOrStoreRating($this->productId, $this->rating, getLoggedInUserId());
+
+                break;
+            case 'getRatingInfo':
+
+                $this->productIds = getPostVar('productIds');
+
+                foreach ($this->productIds as $key => $productid) {
+                    $this->productIds[$key] = test_input($productid);
+                }
+        
+                $this->userRatings = getUserRating($this->productIds, getLoggedInUserId());
+                $this->avgRatings = getAvgProductRating($this->productIds);
+
+                // create the correct data structure
+                foreach ($this->avgRatings as $index => $productInfo) {
+                    $key = $productInfo['product_id'];
+                    if (array_key_exists($key, $this->userRatings)) {
+                        $this->avgRatings[$index]['userRating'] = $this->userRatings[$key];
+                    }
+                };
+
+                echo json_encode($this->avgRatings);
+
+                break;
+            default:
+                # code...
+                break;
+        }
     }
 
 }
