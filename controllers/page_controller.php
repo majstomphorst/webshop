@@ -65,47 +65,6 @@ class PageController
                 $controller = new ProductsController($this->model);
                 $controller->handleTop5Request();
                 break;
-
-
-
-
-
-
-
-
-     
-            // case 'top5':
-            //     require_once 'classes/top5_doc.php';
-            //     $view = new Top5Doc($data);
-            //     $view->show();
-            //     break;
-            // case 'cart':
-            //     require_once 'classes/cart_doc.php';
-            //     $view = new CartDoc($data);
-            //     $view->show();
-            //     break;
-            // case 'login':
-            //     require_once 'classes/login_doc.php';
-            //     $view = new LoginDoc($data);
-            //     $view->show();
-            //     break;
-            // case 'register':
-            //     require_once 'classes/register_doc.php';
-            //     $view = new RegisterDoc($data);
-            //     $view->show();
-            //     break;
-            // case 'detailProduct':
-            //     require_once 'classes/detail_product_doc.php';
-            //     $view = new DetailProductDoc($data);
-            //     $view->show();
-            //     break;
-            // default:
-            //     var_dump('NOO!');
-            //     break;
         }
-
-
     }
-
-
 }

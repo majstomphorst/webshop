@@ -139,7 +139,7 @@ function getProductById($productId)
 *
 * @param orderInfo array[0 => array['productId','amount','unit_price'],
 *                        1 => array[],
-*                        'total_price']
+*                        'total_price' => ]
 * @param productId int
 * @return void or throws
 */
@@ -160,7 +160,7 @@ function storeOrder($orderInfo, $userId)
         unset($orderInfo['total_price']);
 
         foreach ($orderInfo as $orderRow) {
-            
+
             $product_id = $orderRow['productId'];
             $amount = $orderRow['amount'];
             $price = $orderRow['unit_price'];

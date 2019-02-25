@@ -20,7 +20,6 @@ class ContactController
         } 
         
         if ($this->model->valid) {
-            // show thankYouMessage();
             $view = new ThankYouDoc($this->model);
             $view->show();
         } else {
