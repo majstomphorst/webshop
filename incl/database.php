@@ -145,9 +145,6 @@ function getProductById($productId)
 */
 function storeOrder($orderInfo, $userId)
 {
-    //TODO: this function needs to be fix!!!
-    
-
     $conn = connectToEducomDatabase();
     $total_price = $orderInfo['total_price'];
 
@@ -160,14 +157,10 @@ function storeOrder($orderInfo, $userId)
         }
 
         $orders_id = mysqli_insert_id($conn);
+        unset($orderInfo['total_price']);
 
         foreach ($orderInfo as $orderRow) {
-
-            // the orderInfo includes total_price on the last line
-            // this is not a new product order so if there is no id stop
-            if (empty($orderRow['productId'])) {
-                return false;
-            }
+            
             $product_id = $orderRow['productId'];
             $amount = $orderRow['amount'];
             $price = $orderRow['unit_price'];
