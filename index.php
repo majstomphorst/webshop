@@ -11,7 +11,6 @@ $pageController->handleRequest();
 // romve everything
 exit();
 
-
 // get the form data that is posted to the server or returns the default
 function getPostVar($key, $default = '')
 {
