@@ -2,7 +2,8 @@
 require_once "models/products_model.php";
 require_once "classes/ajax_doc.php";
 
-class AjaxController {
+class AjaxController 
+{
     private $model;
 
     public function __construct(PageModel $model)

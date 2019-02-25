@@ -16,7 +16,6 @@ class ProductsModel extends PageModel
     private $actionAjax = '';
     private $productIds = array();
     private $userRatings = array();
-    private $avgRatings = array();
 
     public $jsonData = array();
 
@@ -69,7 +68,6 @@ class ProductsModel extends PageModel
                 case 'addToCart':
                     mutateToCart($this->productId, 1);
                     break;
-
                 case 'removeFromCart':
                     mutateToCart($this->productId, -1);
                     break;
@@ -120,12 +118,11 @@ class ProductsModel extends PageModel
      */
     public function prepareOrderInfoForStorage()
     {
-
-        $cart = getCart();
+        $this->cart = getCart();
         $orderInfo = array();
         $total_price = 0;
 
-        foreach ($cart as $productId => $amount) {
+        foreach ($this->cart as $productId => $amount) {
             $productInfo = getProductById($productId);
 
             $cartRow['productId'] = $productId;
@@ -159,17 +156,15 @@ class ProductsModel extends PageModel
                 }
         
                 $this->userRatings = getUserRating($this->productIds, getLoggedInUserId());
-                $this->avgRatings = getAvgProductRating($this->productIds);
+                $this->jsonData = getAvgProductRating($this->productIds);
 
                 // create the correct data structure
-                foreach ($this->avgRatings as $index => $productInfo) {
+                foreach ($this->jsonData as $index => $productInfo) {
                     $key = $productInfo['product_id'];
                     if (array_key_exists($key, $this->userRatings)) {
-                        $this->avgRatings[$index]['userRating'] = $this->userRatings[$key];
+                        $this->jsonData[$index]['userRating'] = $this->userRatings[$key];
                     }
                 };
-
-                $this->jsonData = $this->avgRatings;
 
                 break;
             default:
