@@ -7,7 +7,7 @@ session_start();
 * @return void 
 * 
 */
-function login(associtive $userInfo)
+function login($userInfo)
 {
     $_SESSION['user'] = $userInfo;
 }

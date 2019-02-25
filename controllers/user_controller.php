@@ -42,7 +42,7 @@ class UserController
         $view->show();
     }
 
-    public function handelRegisterRequest() 
+    public function handleRegisterRequest() 
     {
         $view = new RegisterDoc($this->model);
 
