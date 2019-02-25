@@ -27,7 +27,9 @@ abstract class FormDoc extends basicDoc
 
     protected function startForm(String $action = "index.php", String $methode = "POST")
     {
-        echo "<form class='form-group' action='$action' method='$methode'>";
+        echo "<form class='form-group' action='$action' method='$methode'>"; 
+        /* JH TIP: advies om $ in strings niet te gebruiken, en voor html attributen de " te gebruiken, omdat dat i.c.m. jQuery tot verwarring kan leiden. 
+                   Gebruikt string concaternatie dus echo '<form class="form-group" action="'.$action.'" method="'.$methode.'">'; */
     }
     protected function endForm()
     {
@@ -42,7 +44,7 @@ abstract class FormDoc extends basicDoc
         </div>";
     }
 
-    protected function hiddenFormField()
+    protected function hiddenFormField() /* JH: De naam suggereerd dat je elk hidden form kan toevoegen, terwijl je alleen de pagina kan toevoegen */
     {
         echo"<input type='hidden' name='page' value='".$this->model->requested_page."'>";
     }

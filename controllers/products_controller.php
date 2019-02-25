@@ -29,8 +29,9 @@ class ProductsController
         if (count($this->model->products) <= 0) {
 
             $this->model->requested_page = "products";
-            $this->handelProductsRequest();
+            $this->handelProductsRequest(); /* JH: Deze functie bestaat niet, bedoel je handleProductsRequest, blijkbaar heb je dit niet meer getest laatst ? */
         } else {
+            /* JH TIP: Opdat de $view nergens anders wordt gebruikt dan in deze 'else' zou ik hen ook hier pas definieren (scheelt weer geheugen) */
             $view->show();
         }
     }

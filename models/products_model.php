@@ -6,7 +6,7 @@ require_once "incl/session_manager.php";
 class ProductsModel extends PageModel
 {
     public $products = array();
-    public $optionToBuy = 'disabled';
+    public $optionToBuy = 'disabled'; /* Dit is iets voor de $view, $optionToBuy zou alleen true of false moeten zijn in een model */
     public $productId = null;
 
     public $actionCart = null;
@@ -23,6 +23,7 @@ class ProductsModel extends PageModel
     {
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
+        /* JH: Zet hier $this->optionToBuy = $this->loggedin; */
     }
 
     public function getProducts()
@@ -72,9 +73,9 @@ class ProductsModel extends PageModel
                     mutateToCart($this->productId, -1);
                     break;
                 case 'placeOrder':
-                    $orderInfo = $this->prepareOrderInfoForStorage();
+                    $orderInfo = $this->prepareOrderInfoForStorage(); /* JH: Zie opmerking op regel 123 */
                     $userId = getLoggedInUserId();
-                    if (storeOrder($orderInfo, $userId)) {
+                    if (storeOrder($orderInfo, $userId)) { /* JH: Dit wordt dan: if (storeOrder($this->cartRows, $userId)) { ... */
                         removeCart();
                     }
                     break;
@@ -91,16 +92,19 @@ class ProductsModel extends PageModel
      */
     public function prepareShoppingCart()
     {
-        $this->cart = getCart();
-        $this->cartRows = array();
+        $this->cart = getCart(); /* JH: Cart hoeft niet in de model bewaard te blijven */
+        $this->cartRows = array(); 
 
-        foreach ($this->cart as $productId => $amount) {
-            $cartRow = array('product' => getProductById($productId));
+        /* JH TIP: zet $this->totalPrice = 0; hier */
+        foreach ($this->cart /* JH: Gebruik hier GetCart() */ as $productId => $amount) {
+            /* JH TIP: Maak van cartRow een class, dan hoef je hier geen arrays meer te gebruiken */
+            $cartRow = array('product' => getProductById($productId)); /* JH: Hier wordt voor ieder product in de cart een SQL query gedaan. Het is beter om voor de foreach een $products = getProducts() (= 1 SQL query) te doen om en dan hier te zetten $cartRow = array('product' => $products[$productId]); */
             $cartRow['amount'] = intval($amount);
             $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
             array_push($this->cartRows, $cartRow);
+            /* JH TIP: Bereken ook $this->total_price += $cartRow['total']; */
         }
-        $this->cart = array('cart' => $this->cartRows);
+        $this->cart = array('cart' => $this->cartRows); /* JH: Array 'cart' is niet nodig, als je in de model/view ook werkt met $this->cartRows; */
     }
 
     public function getTop5()
@@ -116,14 +120,14 @@ class ProductsModel extends PageModel
      *                                    'total_price']
      *
      */
-    public function prepareOrderInfoForStorage()
+    public function prepareOrderInfoForStorage() /* JH: Als je in $prepareShoppingCart ook de $this->totalPrice berekend, kan deze functie komen te vervallen */
     {
-        $this->cart = getCart();
+        $this->cart = getCart();  /* JH: Cart hoeft niet in de model bewaard te blijven */
         $orderInfo = array();
         $total_price = 0;
 
         foreach ($this->cart as $productId => $amount) {
-            $productInfo = getProductById($productId);
+            $productInfo = getProductById($productId); /* JH: Hier wordt voor ieder product in de cart een SQL query gedaan. Het is beter om voor de foreach een $products = getProducts() (= 1 SQL query) te doen om en dan hier te zetten $productInfo => $products[$productId]); */
 
             $cartRow['productId'] = $productId;
             $cartRow['amount'] = $amount;
@@ -138,24 +142,24 @@ class ProductsModel extends PageModel
 
     public function handleAjaxActions()
     {
-        $this->actionAjax = test_input(getPostVar('action'));
+        $this->actionAjax = test_input(getPostVar('action')); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
 
         switch ($this->actionAjax) {
             case 'updateRating':
-                $this->productId = test_input(getPostVar('productId'));
-                $this->rating = test_input(getPostVar('rating'));
+                $this->productId = test_input(getPostVar('productId')); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
+                $this->rating = test_input(getPostVar('rating')); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
                 updateOrStoreRating($this->productId, $this->rating, getLoggedInUserId());
 
                 break;
             case 'getRatingInfo':
-
-                $this->productIds = getPostVar('productIds');
+                /* JH TIP: Deze 'case' begint aardig lang te worden, misschien private functie van maken? */
+                $this->productIds = getPostVar('productIds'); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
 
                 foreach ($this->productIds as $key => $productid) {
                     $this->productIds[$key] = test_input($productid);
                 }
         
-                $this->userRatings = getUserRating($this->productIds, getLoggedInUserId());
+                $this->userRatings = getUserRating($this->productIds, getLoggedInUserId()); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
                 $this->jsonData = getAvgProductRating($this->productIds);
 
                 // create the correct data structure

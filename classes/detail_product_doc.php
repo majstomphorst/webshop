@@ -1,5 +1,6 @@
 <?php
 require_once "abstract_product_doc.php";
+require_once "incl/money_format.php";
 
 class DetailProductDoc extends productDoc
 {
@@ -34,16 +35,17 @@ class DetailProductDoc extends productDoc
                             <div class="card-body">
                                 <h5 class="card-textl">' . $this->model->products['description'] . '</h5>
                                 <hr>
-                                <h3>&#8364; ' . money_format('%.2n', $this->model->products['price']) . '</h3>
+                                <h3>&#8364; ' /* JH TIP: Gebruik &euro hier */ . money_format('%.2n' /* Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $this->model->products['price']) . '</h3>
                                 <hr>';
         if ($this->model->loggedIn) {
             $this->showReatingPanel();
         }
 
+        /* JH: Onderstaand form wordt ook in productDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">
                                     <input type="hidden" name="action" value="addToCart">
-                                    <button value="'.$this->model->products['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
+                                    <button value="'.$this->model->products['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy /* JH: Dit zou moeten zijn ($this->model->optionToBuy ? '' : 'disabled') */.'>Buy</button>
                                 </form>
                             </div>
                         </div>
