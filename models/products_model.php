@@ -11,6 +11,7 @@ class ProductsModel extends PageModel
 
     public $actionCart = null;
     public $cart = array();
+    private $cartRows = array();
 
     private $actionAjax = '';
     private $productIds = array();
@@ -90,16 +91,16 @@ class ProductsModel extends PageModel
      */
     public function prepareShoppingCart()
     {
-        $cart = getCart();
-        $cartRows = array();
+        $this->cart = getCart();
+        $this->cartRows = array();
 
-        foreach ($cart as $productId => $amount) {
+        foreach ($this->cart as $productId => $amount) {
             $cartRow = array('product' => getProductById($productId));
             $cartRow['amount'] = intval($amount);
             $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
-            array_push($cartRows, $cartRow);
+            array_push($this->cartRows, $cartRow);
         }
-        $this->cart = array('cart' => $cartRows);
+        $this->cart = array('cart' => $this->cartRows);
     }
 
     public function getTop5()
