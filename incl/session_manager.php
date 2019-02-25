@@ -3,13 +3,12 @@ session_start();
 
 /**
 * login user stores a username in the session
-*
+* @param associtive 
 * @return void 
 * 
 */
-function login(array $userInfo)
+function login(associtive $userInfo)
 {
-    // TODO: save user ID 
     $_SESSION['user'] = $userInfo;
 }
 
