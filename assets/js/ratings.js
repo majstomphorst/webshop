@@ -22,16 +22,13 @@ function getRatingInfo(productIds) {
       productIds: productIds
     },
     function (data) {
-
-      array = JSON.parse(data);
-
       // card where the product is displayed
       $(".card").each(function () {
 
         // get the productId that is displayed on the card
         let productId = $(this).find(".buyButton").val();
 
-        array.forEach(ratingInfo => {
+        data.forEach(ratingInfo => {
           if (ratingInfo.product_id == productId) {
             let avg = parseFloat(ratingInfo.avgRating).toFixed(2)
             $(this).find(".avgRating").text(avg);

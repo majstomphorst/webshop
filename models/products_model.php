@@ -18,6 +18,8 @@ class ProductsModel extends PageModel
     private $userRatings = array();
     private $avgRatings = array();
 
+    public $jsonData = array();
+
     public function __construct(PageModel $model)
     {
         // pass the model on to our parent class (PageModel)
@@ -167,7 +169,7 @@ class ProductsModel extends PageModel
                     }
                 };
 
-                echo json_encode($this->avgRatings);
+                $this->jsonData = $this->avgRatings;
 
                 break;
             default:
