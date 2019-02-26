@@ -38,17 +38,17 @@ class PageController
                 break;
             case 'login':
                 require_once "controllers/user_controller.php";
-                $controller = new UserController($this->model,$this->crud);
+                $controller = new UserController($this->model, $this->crud);
                 $controller->handleLoginRequest();
                 break;
             case 'logout':
                 require_once "controllers/user_controller.php";
-                $controller = new UserController($this->model);
+                $controller = new UserController($this->model, $this->crud);
                 $controller->handleLogOutRequest();
                 break;
             case 'register':
                 require_once "controllers/user_controller.php";
-                $controller = new UserController($this->model);
+                $controller = new UserController($this->model, $this->crud);
                 $controller->handleRegisterRequest();
                 break;
             case 'products':

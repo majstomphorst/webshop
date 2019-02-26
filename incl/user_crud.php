@@ -52,8 +52,8 @@ class userCRUD
     }
 }
 
-$crud = new CRUD();
-$user_crud = new userCRUD($crud);
+// $crud = new CRUD();
+// $user_crud = new userCRUD($crud);
 // $user_crud->storeUser('pim','tak@abc.com','klaasvaak');
 
 // $result = $user_crud->findUserByEmail('kip@kip.com');
@@ -89,4 +89,4 @@ $user_crud = new userCRUD($crud);
 // $i = $user_crud->getUserRating('13');
 // var_dump($i);
 
-$user_crud->updateOrStoreRating(1,5,13);
+// $user_crud->updateOrStoreRating(1,5,13);

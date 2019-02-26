@@ -21,7 +21,7 @@ function login($userInfo)
 function getLoggedInUserName() {
     
     if (isLoggedIn()) {
-        return $_SESSION['user']['name'];;
+        return $_SESSION['user']->name;
     } else {
         return null;
     }

@@ -6,10 +6,9 @@ class PageModel
     public $requested_page;
     public $isPost;
     public $loggedIn;
-
-    protected $requested_type;
-    protected $menuLeft;
-    protected $menuRight;
+    public $requested_type;
+    public $menuLeft;
+    public $menuRight;
 
     public function __construct(PageModel $model = NULL)
     {

@@ -1,6 +1,5 @@
 <?php
-require_once 'database.php';
-require_once '../incl/user_crud.php';
+require_once 'user_crud.php';
 
 class UserRepository
 {

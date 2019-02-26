@@ -150,7 +150,6 @@ function storeOrder($orderInfo, $userId)
     unset($orderInfo['total_price']);
 
     try {
-        var_dump($orderInfo);
         $sql = "INSERT INTO orders (user_id)
                 VALUES('".$userId."')";
 
