@@ -1,5 +1,6 @@
 <?php
 require_once 'classes/basic_doc.php';
+require_once "incl/money_format.php";
 
 class CartDoc extends BasicDoc
 {
@@ -22,11 +23,12 @@ class CartDoc extends BasicDoc
                 </tr>
                 </thead>
                 <tbody>';
-        if (array_key_exists('cart', $this->model->cart)) {
+        if (array_key_exists('cart', $this->model->cart)) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
             foreach ($this->model->cart['cart'] as $cartRow) {
                 $this->showRow($cartRow);
             }
         }
+        /* JH Extra: Toon ook het total van de Cart hier aan de gebruiker (opgeslagen in $model->total) */
         echo '</tbody>
             </table>
             <form action="index.php" method="post">
@@ -41,7 +43,7 @@ class CartDoc extends BasicDoc
         echo '
     <tr>
         <th>' . $cartRow['product']['name'] . '</th>
-        <th>&euro; ' . money_format('%.2n', $cartRow['product']['price']) . '</th>
+        <th>&euro; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['product']['price']) . '</th>
         <th>
             <div class="row">
                 <div class="col-sm">
@@ -64,7 +66,7 @@ class CartDoc extends BasicDoc
                 </div>
             </div>
         </th>
-        <th>&#8364; ' . money_format('%.2n', $cartRow['total']) . '</th>
+        <th>&#8364; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['total']) . '</th>
     </tr>
     ';
 

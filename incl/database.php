@@ -115,7 +115,7 @@ function getProductById($productId)
 {
     $conn = connectToEducomDatabase();
     try {
-        $sql = "SELECT * FROM products WHERE id='$productId'";
+        $sql = "SELECT * FROM products WHERE id='$productId'"; /* JH TIP: Beter string concaternatie gebruiken */
         $result = mysqli_query($conn,$sql);
         
         

@@ -5,7 +5,7 @@ require_once "incl/session_manager.php";
 
 /**
 * 
-* This needs a description
+* This needs a description /* JH: IT SURE DOES */
 * 
 *
 * 
@@ -84,9 +84,10 @@ class UserModel extends PageModel
     {
         $this->userInfo = validateUser($this->email, $this->password);
         if ($this->userInfo) {
-            return true;
+            return true; /* JH TIP: zet $this->validDb op true; */
         } else {
-            return false;
+            /* JH: Zet de $this->loginErr hier */
+            return false; /* JH TIP: zet $this->validDb op false; */
         }
     }
 
