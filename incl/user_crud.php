@@ -112,24 +112,6 @@ class userCRUD
             $orders_id = mysqli_insert_id($conn);
             
 
-            foreach ($orderInfo as $orderRow) {
-
-                $product_id = $orderRow['productId'];
-                $amount = $orderRow['amount'];
-                $price = $orderRow['unit_price'];
-
-                $sql =  "INSERT INTO orders_products (order_id, product_id, amount, price) 
-                            VALUES('$orders_id','$product_id','$amount',$price)";
-
-                if (!mysqli_query($conn,$sql)) {
-                    throw new Exception("Insertion order_product failed: " . mysqli_error($conn), 4);
-                }
-            }
-            return true;
-
-        } finally {
-            mysqli_close($conn);
-        }
 
     }
 
