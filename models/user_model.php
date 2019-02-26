@@ -1,9 +1,9 @@
 <?php
 require_once "models/page_model.php";
-require_once "incl/data_storage.php";
 require_once "incl/session_manager.php";
 require_once "incl/crud.php";
 require_once "incl/user_crud.php";
+require_once "incl/user_repository.php";
 
 /**
 * 
@@ -34,14 +34,14 @@ class UserModel extends PageModel
 
     private $userInfo = null;
 
-    /** @var UserCrud */
-    private $userCrud = null;
+    /** @var UserRepository */
+    private $userRepository = null;
 
     public function __construct(PageModel $model, CRUD $crud)
     {
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
-        $this->userCrud = new UserCrud($crud);
+        $this->userRepository = new UserRepository(new UserCrud($crud));
     }
 
     public function validateLoginForm()
@@ -88,7 +88,9 @@ class UserModel extends PageModel
 
     public function validateUserAgainstDb()
     {
-        $this->userInfo = $this->userCrud->findUserByEmail($this->email);
+        // TODO: fix me 
+        $this->userInfo = $this->findUserByEmail($this->email);
+
         if ($this->userInfo) {
             return true;
         } else {
@@ -110,8 +112,8 @@ class UserModel extends PageModel
 
     public function registerUser()
     {
-        try {
-            if (registerUser($this->name,$this->email,$this->password)) {
+    try {
+            if ($this->userRepository->registerUser($this->name,$this->email,$this->password)) {
                 $this->dbValid = true;
             } else {
                 $this->errorMessage = 'user is already in database';

@@ -23,8 +23,8 @@ class UserRepository
      */
     public function registerUser(String $name, String $email, String $password)
     {
-        if (!doesUserExist($email, $password)) {
-            storeUser($name, $email, $password);
+        if (!$this->doesUserExist($email, $password)) {
+            $this->userCrud->storeUser($name, $email, $password);
             return true;
         } else {
             return false;
@@ -41,13 +41,13 @@ class UserRepository
  */
     public function validateUser(String $email, String $password)
     {
-        $UserInfo = findUserByEmail($email);
+        $UserInfo = $this->userCrud->findUserByEmail($email);
 
         // if not set no user == false
         if (!isset($UserInfo)) {
             return null;
         }
-        if ($UserInfo['password'] == $password) {
+        if ($UserInfo->password == $password) {
             return $UserInfo;
         }
         return null;
@@ -62,8 +62,8 @@ class UserRepository
  */
     public function doesUserExist(String $email)
     {
-        $dbUserInformation = findUserByEmail($email);
-        if (isset($dbUserInformation)) {
+        $dbUserInformation = $this->userCrud->findUserByEmail($email);
+        if (!empty($dbUserInformation)) {
             return true;
         } else {
             return false;

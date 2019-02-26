@@ -34,7 +34,7 @@ function getLoggedInUserName() {
 */
 function getLoggedInUserId() {
     if (isLoggedIn()) {
-        return $_SESSION['user']['id'];;
+        return $_SESSION['user']->id;;
     } else {
         return null;
     }

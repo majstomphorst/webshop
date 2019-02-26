@@ -177,8 +177,6 @@ function storeOrder($orderInfo, $userId)
     } finally {
         mysqli_close($conn);
     }
-
-
 }
 
 /**
