@@ -145,19 +145,20 @@ function getProductById($productId)
 */
 function storeOrder($orderInfo, $userId)
 {
+
     $conn = connectToEducomDatabase();
-    $total_price = $orderInfo['total_price'];
+    unset($orderInfo['total_price']);
 
     try {
-        $sql = "INSERT INTO orders (user_id, total_price)
-                VALUES('".$userId."','$total_price')";
+        var_dump($orderInfo);
+        $sql = "INSERT INTO orders (user_id)
+                VALUES('".$userId."')";
 
         if (!mysqli_query($conn,$sql)) {
             throw new Exception("Insertion order failed: " . mysqli_error($conn), 2);
         }
 
         $orders_id = mysqli_insert_id($conn);
-        unset($orderInfo['total_price']);
 
         foreach ($orderInfo as $orderRow) {
 
@@ -177,6 +178,7 @@ function storeOrder($orderInfo, $userId)
     } finally {
         mysqli_close($conn);
     }
+
 
 }
 
@@ -226,6 +228,7 @@ function getTop5Sold()
 
 function getAvgProductRating($productIds)
 {
+    
     $str = implode(", ", $productIds);
     $productAvg = array();
 
