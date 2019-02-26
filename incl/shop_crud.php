@@ -2,7 +2,7 @@
 require_once "crud.php";
 
 /**
- * handles the databae functions for the user.
+ * handles the databae functions for the shop.
  */
 class userCRUD
 {
