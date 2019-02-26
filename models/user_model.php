@@ -2,6 +2,8 @@
 require_once "models/page_model.php";
 require_once "incl/data_storage.php";
 require_once "incl/session_manager.php";
+require_once "incl/crud.php";
+require_once "incl/user_crud.php";
 
 /**
 * 
@@ -32,10 +34,14 @@ class UserModel extends PageModel
 
     private $userInfo = null;
 
-    public function __construct(PageModel $model)
+    /** @var UserCrud */
+    private $userCrud = null;
+
+    public function __construct(PageModel $model, CRUD $crud)
     {
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
+        $this->userCrud = new UserCrud($crud);
     }
 
     public function validateLoginForm()

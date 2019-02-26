@@ -1,13 +1,19 @@
 <?php
 require_once "models/page_model.php";
+require_once 'incl/crud.php';
 
 class PageController
 {
+    /** @var PageModel */
     private $model;
+
+    /** @var CRUID */
+    private $crud;
 
     public function __construct()
     { 
         $this->model = new PageModel();
+        $this->crud = new CRUD();
     }
 
     public function handleRequest() 
@@ -32,7 +38,7 @@ class PageController
                 break;
             case 'login':
                 require_once "controllers/user_controller.php";
-                $controller = new UserController($this->model);
+                $controller = new UserController($this->model,$this->crud);
                 $controller->handleLoginRequest();
                 break;
             case 'logout':

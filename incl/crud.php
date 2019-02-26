@@ -104,7 +104,13 @@ class CRUD implements iCRUD
     public function readMultiRows($sql, $bindParameters = array())
     {
         $stmt = $this->prepareAndExecute($sql, $bindParameters);
-        $result = $stmt->fetchall();
+        foreach ($stmt->fetchall() as $obj) {
+            if (key_exists('id', $obj)) {
+                $result[$obj->id] = $obj;
+            } else {
+                array_push($result, $obj);
+            }
+        }
         return $result;
     }
 

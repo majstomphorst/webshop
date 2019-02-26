@@ -4,15 +4,15 @@ require_once "incl/session_manager.php";
 class PageModel
 {
     public $requested_page;
-    protected $requested_type;
     public $isPost;
-    public $menuLeft;
-    public $menuRight;
     public $loggedIn;
+
+    protected $requested_type;
+    protected $menuLeft;
+    protected $menuRight;
 
     public function __construct(PageModel $model = NULL)
     {
-        // pass the data on to our parent class (basicDoc)
         if ($model) {
             $this->requested_page = $model->requested_page;
             $this->requested_type = $model->requested_type;
@@ -51,6 +51,5 @@ class PageModel
             $this->loggedIn = false;
             $this->menuRight = array('login' => 'Login', 'register' => 'Register');
         }
-
     }
 }

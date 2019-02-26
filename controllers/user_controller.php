@@ -6,11 +6,12 @@ require_once "classes/home_doc.php";
 
 class UserController
 {
+    /** @var UserModel */
     private $model;
 
-    public function __construct($pageModel)
+    public function __construct($pageModel,$crud)
     {
-        $this->model = new UserModel($pageModel);
+        $this->model = new UserModel($pageModel, $crud);
     }
 
     public function handleLoginRequest()
