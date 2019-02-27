@@ -56,7 +56,7 @@ class UserRepository
  * check if a users email is in the database
  *
  * @param   String email
- * @return  bool true if users emailis in db false otherwise
+ * @return  UserInfo or fales
  *
  */
     public function doesUserExist(String $email)
