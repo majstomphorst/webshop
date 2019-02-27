@@ -47,6 +47,7 @@ class ProductsController
     public function handleTop5Request()
     {
         $this->model->getTop5();
+
         $view = new Top5Doc($this->model);
         $view->show();
     } 

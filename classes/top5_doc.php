@@ -38,9 +38,9 @@ class Top5Doc extends basicDoc
     <tr>
       <th scope="row">' . $rank . '</th>
       <td>
-        <a href="?page=detailProduct&id=' . $product['product_id'] . '" title="button">' . $product['name'] . '</a>
+        <a href="?page=detailProduct&id=' . $product->product_id . '" title="button">' . $product->name . '</a>
       </td>
-      <td>' . $product['sum_amount'] . '</td>
+      <td>' . $product->sum_amount . '</td>
     </tr>';
 
     }

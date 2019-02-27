@@ -108,7 +108,7 @@ class ProductsModel extends PageModel
     }
     public function getTop5()
     {
-        $this->products = getTop5Sold();
+        $this->products = $this->shopCrud->getTop5Sold();
     }
 
     /**

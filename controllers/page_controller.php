@@ -63,12 +63,12 @@ class PageController
                 break;
             case 'cart':
                 require_once "controllers/products_controller.php";
-                $controller = new ProductsController($this->model);
+                $controller = new ProductsController($this->model,$this->crud);
                 $controller->handleCartRequest();
                 break;
             case 'top5':
                 require_once "controllers/products_controller.php";
-                $controller = new ProductsController($this->model);
+                $controller = new ProductsController($this->model,$this->crud);
                 $controller->handleTop5Request();
                 break;
             case 'ajax':
