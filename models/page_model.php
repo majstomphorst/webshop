@@ -24,7 +24,7 @@ class PageModel
 
     public function getRequestedPage()
     {
-        $this->requested_type = $_SERVER['REQUEST_METHOD'];
+        $this->requested_type = $_SERVER['REQUEST_METHOD']; /* JH: Wordt dit nog ergens anders gebruikt? */
         $this->isPost = $this->requested_type == 'POST';
         if ($this->isPost) {
             $this->requested_page = getPostVar('page', 'home');

@@ -6,7 +6,7 @@ require_once "basic_doc.php";
  */
 abstract class productDoc extends basicDoc
 {
-    protected function showReatingPanel()
+    protected function showReatingPanel() /* JH: Wat is een 'Reating?' ik kan alleen vinden dat het een achternaam is */
     {
         echo"
     <!-- Rating Stars Box -->

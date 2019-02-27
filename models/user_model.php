@@ -7,7 +7,7 @@ require_once "incl/user_repository.php";
 
 /**
 * 
-* This needs a description
+* This needs a description /* JH: IT SURE DOES */
 * 
 *
 * 
@@ -90,9 +90,10 @@ class UserModel extends PageModel
     {
         $this->userInfo = $this->userRepository->doesUserExist($this->email);
         if ($this->userInfo) {
-            return true;
+            return true; /* JH TIP: zet $this->validDb op true; */
         } else {
-            return false;
+            /* JH: Zet de $this->loginErr hier */
+            return false; /* JH TIP: zet $this->validDb op false; */
         }
     }
 
