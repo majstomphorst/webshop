@@ -30,28 +30,6 @@ class ProductsModel extends PageModel
         $this->shopCrud = new ShopCrud($crud);
     }
 
-    /**
-     * reads the database and looks up a user by there email
-     *
-     * @param   String email to look up in the database
-     * @return  associtive array['name','email','password']
-     *
-     */
-    public function prepareShoppingCart()
-    {
-        $this->cart = getCart();
-        $this->cartRows = array();
-
-        foreach ($this->cart as $productId => $amount) {
-            $cartRow = array('product' => $this->shopCrud->getProductById($productId));
-            $cartRow['amount'] = intval($amount);
-            $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
-            array_push($this->cartRows, $cartRow);
-        }
-        $this->cart = array('cart' => $this->cartRows);
-        /* JH: Zet hier $this->optionToBuy = $this->loggedin; */
-    }
-
     public function getProducts()
     {
         try {
@@ -107,8 +85,6 @@ class ProductsModel extends PageModel
             }
         }
     }
-<<<<<<< HEAD
-=======
 
     /**
      * reads the database and looks up a user by there email
@@ -132,9 +108,10 @@ class ProductsModel extends PageModel
             /* JH TIP: Bereken ook $this->total_price += $cartRow['total']; */
         }
         $this->cart = array('cart' => $this->cartRows); /* JH: Array 'cart' is niet nodig, als je in de model/view ook werkt met $this->cartRows; */
+        /* JH: Zet hier $this->optionToBuy = $this->loggedin; */
     }
 
->>>>>>> d776bd8e7d24bdeb60ad81abd63a0ae81abd8ea9
+
     public function getTop5()
     {
         $this->products = $this->shopCrud->getTop5Sold();
