@@ -24,17 +24,17 @@ class DetailProductDoc extends productDoc
         echo '
                 <div class="row">
                     <div class="col-4">
-                        <img src="./assets/images/' . $this->model->products['image_name'] . '.png" class="img-fluid" alt="Responsive image">
+                        <img src="./assets/images/' . $this->model->products->image_name . '.png" class="img-fluid" alt="Responsive image">
                     </div>
                     <div class="col-8">
                         <div class="card">
                             <div class="card-header">
-                                <h2>' . $this->model->products['name'] . ' <span class="badge badge-secondary">Exclusive</span></h2>
+                                <h2>' . $this->model->products->name . ' <span class="badge badge-secondary">Exclusive</span></h2>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-textl">' . $this->model->products['description'] . '</h5>
+                                <h5 class="card-textl">' . $this->model->products->description . '</h5>
                                 <hr>
-                                <h3>&#8364; ' . money_format('%.2n', $this->model->products['price']) . '</h3>
+                                <h3>&#8364; ' . money_format('%.2n', $this->model->products->price) . '</h3>
                                 <hr>';
         if ($this->model->loggedIn) {
             $this->showReatingPanel();
@@ -43,7 +43,7 @@ class DetailProductDoc extends productDoc
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">
                                     <input type="hidden" name="action" value="addToCart">
-                                    <button value="'.$this->model->products['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
+                                    <button value="'.$this->model->products->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                                 </form>
                             </div>
                         </div>

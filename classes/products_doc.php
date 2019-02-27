@@ -46,15 +46,15 @@ class ProductsDoc extends ProductDoc
         echo '
         <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-offset-0">
             <div class="card border-dark text-center">
-                <img src="./assets/images/' . $product['image_name'] . '.png" class="card-img-top" alt="...">
+                <img src="./assets/images/' . $product->image_name . '.png" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">' . $product['name'] . '</h5>
-                    <p class="card-text">' . $product['description'] . '</p>
-                    <div class="card-footer bg-transparent border-success">' . money_format('%.2n', $product['price']) . '</div>
+                    <h5 class="card-title">' . $product->name . '</h5>
+                    <p class="card-text">' . $product->description . '</p>
+                    <div class="card-footer bg-transparent border-success">' . money_format('%.2n', $product->price) . '</div>
                     <form action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="addToCart">
-                        <button value="'.$product['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
+                        <button value="'.$product->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
                     </form>';
 
                     // check if a user in loggein 
@@ -63,7 +63,7 @@ class ProductsDoc extends ProductDoc
                     }
                     
                 echo'  <br>
-                    <a href="?page=detailProduct&id='. $product['id'] .'" ><button type="button" class="btn btn-info btn-sm btn-block">More information</button></a>
+                    <a href="?page=detailProduct&id='. $product->id .'" ><button type="button" class="btn btn-info btn-sm btn-block">More information</button></a>
                 </div>
             </div>
         </div>

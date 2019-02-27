@@ -7,7 +7,7 @@ class PageController
     /** @var PageModel */
     private $model;
 
-    /** @var CRUID */
+    /** @var CRUD */
     private $crud;
 
     public function __construct()
@@ -53,12 +53,12 @@ class PageController
                 break;
             case 'products':
                 require_once "controllers/products_controller.php";
-                $controller = new ProductsController($this->model);
+                $controller = new ProductsController($this->model, $this->crud);
                 $controller->handleProductsRequest();
                 break;
             case 'detailProduct':
                 require_once "controllers/products_controller.php";
-                $controller = new ProductsController($this->model);
+                $controller = new ProductsController($this->model, $this->crud);
                 $controller->handleDetailProductsRequest();
                 break;
             case 'cart':

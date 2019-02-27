@@ -8,11 +8,12 @@ require_once "classes/top5_doc.php";
 
 class ProductsController
 {
+    /** @var PageModel */
     private $model;
 
-    public function __construct(PageModel $pageModel)
+    public function __construct(PageModel $pageModel, CRUD $crud)
     {
-        $this->model = new ProductsModel($pageModel);
+        $this->model = new ProductsModel($pageModel,$crud);
     }
 
     public function handleProductsRequest()
@@ -26,10 +27,10 @@ class ProductsController
     {
         $this->model->getProductById();
         $view = new DetailProductDoc($this->model);
-        if (count($this->model->products) <= 0) {
 
+        if (!$this->model->products) {
             $this->model->requested_page = "products";
-            $this->handelProductsRequest();
+            $this->handleProductsRequest();
         } else {
             $view->show();
         }

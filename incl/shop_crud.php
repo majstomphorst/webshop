@@ -4,7 +4,7 @@ require_once "crud.php";
 /**
  * handles the databae functions for the shop.
  */
-class userCRUD
+class ShopCRUD
 {
     /** @var CRUD */
     private $crud = null;

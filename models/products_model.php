@@ -1,12 +1,13 @@
 <?php
-require_once "incl/database.php";
 require_once "incl/session_manager.php";
+require_once "incl/shop_crud.php";
 
 
 class ProductsModel extends PageModel
 {
     public $products = array();
     public $optionToBuy = 'disabled';
+    /** @var int */
     public $productId = null;
 
     public $actionCart = null;
@@ -19,16 +20,41 @@ class ProductsModel extends PageModel
 
     public $jsonData = array();
 
-    public function __construct(PageModel $model)
+    /** @var ShopCrud */
+    public $shopCrud = null;
+
+    public function __construct(PageModel $model, CRUD $crud)
     {
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
+        $this->shopCrud = new ShopCrud($crud);
+    }
+
+    /**
+     * reads the database and looks up a user by there email
+     *
+     * @param   String email to look up in the database
+     * @return  associtive array['name','email','password']
+     *
+     */
+    public function prepareShoppingCart()
+    {
+        $this->cart = getCart();
+        $this->cartRows = array();
+
+        foreach ($this->cart as $productId => $amount) {
+            $cartRow = array('product' => $this->shopCrud->getProductById($productId));
+            $cartRow['amount'] = intval($amount);
+            $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
+            array_push($this->cartRows, $cartRow);
+        }
+        $this->cart = array('cart' => $this->cartRows);
     }
 
     public function getProducts()
     {
         try {
-            $this->products = getProducts();
+            $this->products = $this->shopCrud->getProducts();
         } catch (\Throwable $th) {
             $data['errorMessage'] = $th->getMessage();
         }
@@ -39,7 +65,7 @@ class ProductsModel extends PageModel
         try {
             $this->productId = test_input(getUrlVar('id'));
             if (!empty($this->productId)) {
-                $this->products = getProductById($this->productId);
+                $this->products = $this->shopCrud->getProductById($this->productId);
             }
         } catch (\Throwable $th) {
             $data['errorMessage'] = $th->getMessage();
@@ -80,28 +106,6 @@ class ProductsModel extends PageModel
             }
         }
     }
-
-    /**
-     * reads the database and looks up a user by there email
-     *
-     * @param   String email to look up in the database
-     * @return  associtive array['name','email','password']
-     *
-     */
-    public function prepareShoppingCart()
-    {
-        $this->cart = getCart();
-        $this->cartRows = array();
-
-        foreach ($this->cart as $productId => $amount) {
-            $cartRow = array('product' => getProductById($productId));
-            $cartRow['amount'] = intval($amount);
-            $cartRow['total'] = floatval($cartRow['product']['price']) * $cartRow['amount'];
-            array_push($this->cartRows, $cartRow);
-        }
-        $this->cart = array('cart' => $this->cartRows);
-    }
-
     public function getTop5()
     {
         $this->products = getTop5Sold();
