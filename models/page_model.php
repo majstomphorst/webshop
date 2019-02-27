@@ -4,6 +4,7 @@ require_once "incl/session_manager.php";
 class PageModel
 {
     public $requested_page;
+    /** @var bool */
     public $isPost;
     public $loggedIn;
     public $requested_type;

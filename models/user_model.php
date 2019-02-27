@@ -7,7 +7,7 @@ require_once "incl/user_repository.php";
 
 /**
 * 
-* This needs a description /* JH: IT SURE DOES */
+* This needs a description /* JH: IT SURE DOES
 * 
 *
 * 

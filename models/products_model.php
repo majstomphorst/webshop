@@ -15,7 +15,6 @@ class ProductsModel extends PageModel
     private $cartRows = array();
 
     private $actionAjax = '';
-    private $productIds = array();
     private $userRatings = array();
 
     public $jsonData = array();
@@ -158,22 +157,33 @@ class ProductsModel extends PageModel
                 break;
             case 'getRatingInfo':
                 /* JH TIP: Deze 'case' begint aardig lang te worden, misschien private functie van maken? */
-                $this->productIds = getPostVar('productIds'); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
+                $productIds = getPostVar('productIds'); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
 
-                foreach ($this->productIds as $key => $productid) {
-                    $this->productIds[$key] = test_input($productid);
+                foreach ($productIds as $key => $productid) {
+                    $productIds[$key] = test_input($productid);
                 }
-        
-                $this->userRatings = getUserRating($this->productIds, getLoggedInUserId()); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
-                $this->jsonData = getAvgProductRating($this->productIds);
 
-                // create the correct data structure
-                foreach ($this->jsonData as $index => $productInfo) {
-                    $key = $productInfo['product_id'];
-                    if (array_key_exists($key, $this->userRatings)) {
-                        $this->jsonData[$index]['userRating'] = $this->userRatings[$key];
+        
+                $userRatings = $this->shopCrud->getUserRating(getLoggedInUserId()); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
+                $avgRatings = $this->shopCrud->getAvgProductRating($productIds);
+
+                $json = array();
+                foreach ($avgRatings as $key => $avgRating) {
+                    $avgRating->product_id;
+                    
+                    foreach($userRatings as $key2 => $userRating) {
+                        if ($userRating->product_id == $avgRating->product_id) {
+                            $json[$userRating->product_id] = array('youRating'=> $userRating->rating,'avgRating' => $avgRating->avgRating);
+                        }
                     }
-                };
+                }
+                $this->jsonData = $json;
+                // create the correct data structure
+                // foreach ($this->jsonData as $index => $productInfo) {
+                //     $key = $productInfo['product_id'];
+                //     if (array_key_exists($key, $this->userRatings)) {
+                //         $this->jsonData[$index]['userRating'] = $this->userRatings[$key];
+                //     } 
 
                 break;
             default:

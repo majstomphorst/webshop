@@ -70,6 +70,7 @@ class ShopCRUD
             $orderRow['order_id'] = $order_id;
             $this->crud->createRow($sql, $orderRow);
         }
+        return true;
     }
 
     /**

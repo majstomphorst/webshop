@@ -73,7 +73,7 @@ class PageController
                 break;
             case 'ajax':
                 require_once "controllers/ajax_controller.php";
-                $controller = new AjaxController($this->model);
+                $controller = new AjaxController($this->model, $this->crud);
                 $controller->handleAjaxRequest();
                 break;
         }

@@ -23,10 +23,12 @@ class CartDoc extends BasicDoc
                 </tr>
                 </thead>
                 <tbody>';
-        if (array_key_exists('cart', $this->model->cart)) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
-            foreach ($this->model->cart['cart'] as $cartRow) {
-                $this->showRow($cartRow);
-            }
+
+                
+        if (count($this->model->cart) >= 0) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
+            foreach ($this->model->cart as $cartRow) {
+                    $this->showRow($cartRow);
+                }
         }
         /* JH Extra: Toon ook het total van de Cart hier aan de gebruiker (opgeslagen in $model->total) */
         echo '</tbody>
@@ -42,15 +44,15 @@ class CartDoc extends BasicDoc
     {
         echo '
     <tr>
-        <th>' . $cartRow['product']['name'] . '</th>
-        <th>&euro; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['product']['price']) . '</th>
+        <th>' . $cartRow['name'] . '</th>
+        <th>&euro; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['price']) . '</th>
         <th>
             <div class="row">
                 <div class="col-sm">
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="removeFromCart">
-                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="productId" class="btn btn-outline-danger btn-block">&#8678;</button>
+                        <button value="' . $cartRow['id'] . '" type="submit" name="productId" class="btn btn-outline-danger btn-block">&#8678;</button>
                     </form>
                 </div>
                 <div class="col-sm col-5">
@@ -61,7 +63,7 @@ class CartDoc extends BasicDoc
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="addToCart">
-                        <button value="' . $cartRow['product']['id'] . '" type="submit" name="productId" class="btn btn-outline-success btn-block">&#8680;</button>
+                        <button value="' . $cartRow['id'] . '" type="submit" name="productId" class="btn btn-outline-success btn-block">&#8680;</button>
                     </form>
                 </div>
             </div>

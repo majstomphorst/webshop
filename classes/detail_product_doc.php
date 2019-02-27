@@ -40,7 +40,6 @@ class DetailProductDoc extends productDoc
         if ($this->model->loggedIn) {
             $this->showReatingPanel();
         }
-
         /* JH: Onderstaand form wordt ook in productDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
         echo '<form action="index.php" method="post">
                                     <input type="hidden" name="page" value="cart">

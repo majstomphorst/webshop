@@ -62,7 +62,7 @@ class UserController
             // check if the register form is complete
             if ($this->model->valid) {
 
-                $this->model->registerUser(); /* JH: De naam suggereerd dat het registeren altijd lukt, misschien een naam als tryToRegisterUserInDb() ? */
+                $this->model->registerUser(); /** JH: De naam suggereerd dat het registeren altijd lukt, misschien een naam als tryToRegisterUserInDb() ? */
 
                 if ($this->model->dbValid) {
                     // update model 

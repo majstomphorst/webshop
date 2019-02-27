@@ -98,7 +98,6 @@ function mutateToCart(int $productId, $amount)
         if ($_SESSION['cart'][$productId] <= 0) {
             unset($_SESSION['cart'][$productId]);
         }
-
     } else {
         $_SESSION['cart'][$productId] = $amount;
     }
@@ -111,7 +110,7 @@ function mutateToCart(int $productId, $amount)
 */
 function doesCartExist()
 {
-    if (array_key_exists($_SESSION,'cart')) {
+    if (array_key_exists('cart',$_SESSION)) {
         return true;
     } else {
         return false;
