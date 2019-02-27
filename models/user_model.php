@@ -88,9 +88,7 @@ class UserModel extends PageModel
 
     public function validateUserAgainstDb()
     {
-        // TODO: fix me 
-        $this->userInfo = $this->findUserByEmail($this->email);
-
+        $this->userInfo = $this->userRepository->doesUserExist($this->email);
         if ($this->userInfo) {
             return true;
         } else {

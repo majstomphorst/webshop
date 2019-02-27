@@ -6,7 +6,6 @@ class UserRepository
     /** @var UserCrud */
     private $userCrud = null;
 
-
     public function __construct(UserCrud $userCrud)
     {
         $this->userCrud = $userCrud;
@@ -31,14 +30,14 @@ class UserRepository
         }
     }
 
-/**
- * check if the provided credentials are in the database
- *
- * @param   String email
- * @param   String password
- * @return  bool true if user user credentials correct false otherwise
- *
- */
+    /**
+     * check if the provided credentials are in the database
+     *
+     * @param   String email
+     * @param   String password
+     * @return  bool true if user user credentials correct false otherwise
+     *
+     */
     public function validateUser(String $email, String $password)
     {
         $UserInfo = $this->userCrud->findUserByEmail($email);
@@ -64,10 +63,9 @@ class UserRepository
     {
         $dbUserInformation = $this->userCrud->findUserByEmail($email);
         if (!empty($dbUserInformation)) {
-            return true;
+            return $dbUserInformation;
         } else {
             return false;
         }
     }
-
 }
