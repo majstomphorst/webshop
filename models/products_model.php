@@ -27,7 +27,6 @@ class ProductsModel extends PageModel
     {
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
-<<<<<<< HEAD
         $this->shopCrud = new ShopCrud($crud);
     }
 
@@ -50,9 +49,7 @@ class ProductsModel extends PageModel
             array_push($this->cartRows, $cartRow);
         }
         $this->cart = array('cart' => $this->cartRows);
-=======
         /* JH: Zet hier $this->optionToBuy = $this->loggedin; */
->>>>>>> d776bd8e7d24bdeb60ad81abd63a0ae81abd8ea9
     }
 
     public function getProducts()

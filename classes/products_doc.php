@@ -50,24 +50,14 @@ class ProductsDoc extends ProductDoc
             <div class="card border-dark text-center">
                 <img src="./assets/images/' . $product->image_name . '.png" class="card-img-top" alt="...">
                 <div class="card-body">
-<<<<<<< HEAD
                     <h5 class="card-title">' . $product->name . '</h5>
                     <p class="card-text">' . $product->description . '</p>
-                    <div class="card-footer bg-transparent border-success">' . money_format('%.2n', $product->price) . '</div>
+                    <div class="card-footer bg-transparent border-success">' /* JH TIP: Gebruik &euro hier */ . money_format('%.2n', $product->price) ./* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */ '</div>
                     <form action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="addToCart">
-                        <button value="'.$product->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
-=======
-                    <h5 class="card-title">' . $product['name'] . '</h5>
-                    <p class="card-text">' . $product['description'] . '</p>
-                    <div class="card-footer bg-transparent border-success">' /* JH TIP: Gebruik &euro hier */ . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $product['price']) . '</div>
-                    <form action="index.php" method="post">
-                        <input type="hidden" name="page" value="cart">
-                        <input type="hidden" name="action" value="addToCart">
-                        <button value="'.$product['id'].'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy /* JH: Dit zou moeten zijn ($this->model->optionToBuy ? '' : 'disabled') */ .'>Buy</button>
->>>>>>> d776bd8e7d24bdeb60ad81abd63a0ae81abd8ea9
-                    </form>';
+                        <button value="'.$product->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy ./* JH: Dit zou moeten zijn ($this->model->optionToBuy ? '' : 'disabled') */'>Buy</button>
+                                            </form>';
                     /* JH: Bovenstaand form wordt ook in detailProductDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
                     // check if a user in loggein 
                     if(!$this->model->optionToBuy) { /* JH TIP stop de if in showReatingPanel */
