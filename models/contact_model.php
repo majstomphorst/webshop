@@ -19,9 +19,9 @@ class ContactModel extends PageModel
 
     public function validateForm()
     {
-        $this->name = test_input(getPostVar('name'));
-        $this->email = test_input(getPostVar('email'));
-        $this->text = test_input(getPostVar('text'));
+        $this->name = $this->test_input($this->getPostVar('name'));
+        $this->email = $this->test_input($this->getPostVar('email'));
+        $this->text = $this->test_input($this->getPostVar('text'));
 
         if (empty($this->name)) {$this->nameErr = "Name is required";}
         if (empty($this->email)) {$this->emailErr = "Email is required";}

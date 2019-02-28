@@ -46,8 +46,8 @@ class UserModel extends PageModel
     public function validateLoginForm()
     {
         // collecting data from loginForm
-        $this->email = test_input(getPostVar('email'));
-        $this->password = test_input(getPostVar('password'));
+        $this->email = $this->test_input($this->getPostVar('email'));
+        $this->password = $this->test_input($this->getPostVar('password'));
 
         // check if field are empty
         if (empty($this->email)) {$this->emailErr = "Email is required";}
@@ -62,10 +62,10 @@ class UserModel extends PageModel
     public function validateRegisterForm()
     {
         // collecting data from registerForm
-        $this->name = test_input(getPostVar('name'));
-        $this->email = test_input(getPostVar('email'));
-        $this->password = test_input(getPostVar('password'));
-        $this->passwordCheck = test_input(getPostVar('passwordCheck'));
+        $this->name = $this->test_input($this->getPostVar('name'));
+        $this->email = $this->test_input($this->getPostVar('email'));
+        $this->password = $this->test_input($this->getPostVar('password'));
+        $this->passwordCheck = $this->test_input($this->getPostVar('passwordCheck'));
 
         // check if field are empty
         if (empty($this->name)) {$this->nameErr = "Name is required";}

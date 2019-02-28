@@ -39,7 +39,7 @@ class ProductsModel extends PageModel
 
     public function getProduct()
     {
-        $this->productId = test_input(getUrlVar('id'));
+        $this->productId = test_input($this->getUrlVar('id'));
         if (!empty($this->productId)) {
             $this->getProductById($this->productId);
         }

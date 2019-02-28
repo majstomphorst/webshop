@@ -11,7 +11,7 @@ class PageModel
     public $menuLeft;
     public $menuRight;
 
-    public function __construct(PageModel $model = NULL)
+    public function __construct(PageModel $model = null)
     {
         if ($model) {
             $this->requested_page = $model->requested_page;
@@ -28,9 +28,9 @@ class PageModel
         $this->requested_type = $_SERVER['REQUEST_METHOD']; /* JH: Wordt dit nog ergens anders gebruikt? */
         $this->isPost = $this->requested_type == 'POST';
         if ($this->isPost) {
-            $this->requested_page = getPostVar('page', 'home');
+            $this->requested_page = $this->getPostVar('page', 'home');
         } else {
-            $this->requested_page = getUrlVar('page', 'home');
+            $this->requested_page = $this->getUrlVar('page', 'home');
         }
         $this->generateMenu();
     }
@@ -41,7 +41,7 @@ class PageModel
 
         if (isLoggedIn()) {
             $this->loggedIn = true;
-    
+
             $this->menuLeft['cart'] = 'ShoppingCart';
 
             $username = getLoggedInUserName();
@@ -51,5 +51,32 @@ class PageModel
             $this->loggedIn = false;
             $this->menuRight = array('login' => 'Login', 'register' => 'Register');
         }
+    }
+
+    // get the form data that is posted to the server or returns the default
+    public function getPostVar($key, $default = '')
+    {
+        return isset($_POST[$key]) ? $_POST[$key] : $default;
+    }
+
+    // extracts the requested page (string) or the default
+    public function getUrlVar($key, $default = '')
+    {
+        return isset($_GET[$key]) ? $_GET[$key] : $default;
+    }
+
+    // pulls the data from a array by its key of returns the default
+    public function getArrayVar($arry, $key, $default = '')
+    {
+        return isset($arry[$key]) ? $arry[$key] : $default;
+    }
+
+    /* JH: Verplaats naar PageModel */
+    public function test_input($data)
+    {
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        return $data;
     }
 }

@@ -22,7 +22,7 @@ class UserController
 
             // check if the loginform is complete
             $this->model->validateLoginForm();
-            
+
             if ($this->model->formValid) {
                 // check if credentials are in the db
                 try {
@@ -55,7 +55,7 @@ class UserController
                 
                     if ($this->model->dbValid) {
                         // register user
-                        $this->model->registerUserInDb(); /** JH: De naam suggereerd dat het registeren altijd lukt, misschien een naam als tryToRegisterUserInDb() ? */
+                        $this->model->registerUserInDb();
     
                         // update model
                         $this->model->requested_page = 'login';
