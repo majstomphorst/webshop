@@ -4,7 +4,7 @@ require_once "incl/money_format.php";
 
 class CartDoc extends BasicDoc
 {
-    public function __construct(PageModel $model)
+    public function __construct(ProductsModel $model)
     {
         // pass the data on to our parent class (basicDoc)
         parent::__construct($model);
@@ -25,12 +25,12 @@ class CartDoc extends BasicDoc
                 <tbody>';
 
                 
-        if (count($this->model->cartRows) >= 0) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
+        if (count($this->model->cartRows) >= 0) {
             foreach ($this->model->cartRows as $cartRow) {
                     $this->showRow($cartRow);
                 }
         }
-        /* JH Extra: Toon ook het total van de Cart hier aan de gebruiker (opgeslagen in $model->total) */
+        //TODO:  /* JH Extra: Toon ook het total van de Cart hier aan de gebruiker (opgeslagen in $model->total) */
         echo '</tbody>
             </table>
             <form action="index.php" method="post">

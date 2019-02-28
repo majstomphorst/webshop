@@ -52,12 +52,9 @@ class ProductsDoc extends ProductDoc
                 <div class="card-body">
                     <h5 class="card-title">' . $product->name . '</h5>
                     <p class="card-text">' . $product->description . '</p>
-                    <div class="card-footer bg-transparent border-success">'. money_format('%!.2n', $product->price) .'</div>
-                    <form action="index.php" method="post">
-                        <input type="hidden" name="page" value="cart">
-                        <input type="hidden" name="action" value="addToCart">
-                        <button value="'.$product->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
-                                            </form>';
+                    <div class="card-footer bg-transparent border-success">'. money_format('%!.2n', $product->price) .'</div>';
+                    
+                    $this->showBuyButton($product->id,$this->model->optionToBuy);
                     /* JH: Bovenstaand form wordt ook in detailProductDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
                     // check if a user in loggein 
                     if(!$this->model->optionToBuy) { /* JH TIP stop de if in showReatingPanel */

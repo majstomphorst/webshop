@@ -6,6 +6,16 @@ require_once "basic_doc.php";
  */
 abstract class productDoc extends basicDoc
 {
+    protected function showBuyButton($value,$optionToBuy)
+    {
+        
+       echo '<form action="index.php" method="post">
+                <input type="hidden" name="page" value="cart">
+                <input type="hidden" name="action" value="addToCart">
+                <button value="'.$value.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $optionToBuy .'>Buy</button>
+            </form>';
+    }
+
     protected function showRatingPanel()
     {
         echo"

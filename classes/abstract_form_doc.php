@@ -43,8 +43,7 @@ abstract class FormDoc extends basicDoc
         </div>";
     }
 
-    
-    protected function addHiddenFieldWithPageName() /* JH: De naam suggereerd dat je elk hidden form kan toevoegen, terwijl je alleen de pagina kan toevoegen */
+    protected function addHiddenFieldWithPageName()
     {
         echo"<input type='hidden' name='page' value='".$this->model->requested_page."'>";
     }

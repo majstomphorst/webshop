@@ -40,16 +40,11 @@ class DetailProductDoc extends productDoc
         if ($this->model->loggedIn) {
             $this->showRatingPanel();
         }
-        /* JH: Onderstaand form wordt ook in productDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
-        echo '<form action="index.php" method="post">
-                                    <input type="hidden" name="page" value="cart">
-                                    <input type="hidden" name="action" value="addToCart">
-                                    <button value="'.$this->model->products->id.'" type="submit" name="productId" class="btn btn-success btn-block buyButton"'. $this->model->optionToBuy .'>Buy</button>
-                                </form>
-                            </div>
+            $this->showBuyButton($this->model->products->id,$this->model->optionToBuy);
+                          echo '</div>
                         </div>
                     </div>
-                    </div>';
+                </div>';
     }
 
 }

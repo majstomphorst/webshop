@@ -6,12 +6,13 @@ require_once "incl/rating_info.php";
 
 class ProductsModel extends PageModel
 {
+    
     public $products = array();
-    /** @var int */
+
+
     public $optionToBuy = 'disabled'; /* Dit is iets voor de $view, $optionToBuy zou alleen true of false moeten zijn in een model */
     public $productId = null;
 
-    public $cart = array();
     public $cartRows = array();
 
     public $jsonData = array();
