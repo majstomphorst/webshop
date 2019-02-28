@@ -35,7 +35,7 @@ class DetailProductDoc extends productDoc
                             <div class="card-body">
                                 <h5 class="card-textl">' . $this->model->products->description . '</h5>
                                 <hr>
-                                <h3>&#8364; ' /* JH TIP: Gebruik &euro hier */ . money_format('%.2n' /* Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $this->model->products->price) . '</h3>
+                                <h3>&euro; '. money_format('%!.2n',$this->model->products->price) . '</h3>
                                 <hr>';
         if ($this->model->loggedIn) {
             $this->showRatingPanel();

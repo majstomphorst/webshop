@@ -45,7 +45,7 @@ class CartDoc extends BasicDoc
         echo '
     <tr>
         <th>' . $cartRow['name'] . '</th>
-        <th>&euro; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['price']) . '</th>
+        <th>&euro; ' . money_format('%!.2n', $cartRow['price']) . '</th>
         <th>
             <div class="row">
                 <div class="col-sm">
@@ -68,7 +68,7 @@ class CartDoc extends BasicDoc
                 </div>
             </div>
         </th>
-        <th>&#8364; ' . money_format('%.2n' /* JH: Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $cartRow['total']) . '</th>
+        <th>&#8364;'. money_format('%!.2n', $cartRow['total']) .'</th>
     </tr>
     ';
 

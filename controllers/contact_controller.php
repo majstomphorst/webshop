@@ -5,7 +5,7 @@ require_once "./classes/thank_you_doc.php";
 
 class ContactController 
 {
-    // PageModel > ContactModel /* JH: TIP use /** @var /ContactModel */ om je editor te laten weten dat $model een Contact Model is */
+    /** @var ContactModel */
     private $model;
 
     public function __construct($pageModel)
