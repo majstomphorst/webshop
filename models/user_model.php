@@ -24,11 +24,12 @@ class UserModel extends PageModel
     public $passwordErr = '';
     public $passwordCheckErr = '';
     public $loginErr = '';
-    public $errorMessage = '';
+    public $registerErr = '';
     public $passwordNotEqualErr = '';
 
     // if the user in in the db 
     public $dbValid = false;
+    public $formValid = false;
 
     private $userInfo = null;
 
@@ -52,9 +53,9 @@ class UserModel extends PageModel
         if (empty($this->email)) {$this->emailErr = "Email is required";}
         if (empty($this->password)) {$this->passwordErr = "password is required";}
 
-        // if the fields are not empty 
-        if (isset($this->emailErr) or isset($this->passwordErr)) {
-            $this->valid = true;
+        // if the fields are not empty
+        if (!empty($this->email) and !empty($this->password) ){
+            $this->formValid = true;
         }
     }
 
@@ -72,16 +73,18 @@ class UserModel extends PageModel
         if (empty($this->password)) {$this->passwordErr = "password is required";}
         if (empty($this->passwordCheck)) {$this->passwordCheckErr = "password is required";}
 
-        if (empty($this->nameErr) or empty($this->passwordCheckErr) or
-            empty($this->emailErr) or empty($this->passwordErr)) {
+        
+        if (!empty($this->name) and !empty($this->email) and
+            !empty($this->password) and !empty($this->passwordCheck)) {
 
             // check if provided passwords are the same
-            if ($this->password != $this->passwordCheck) {
+            if ($this->password == $this->passwordCheck) {
+                $this->formValid = true;
+            } else {
                 $this->passwordNotEqualErr = 'Your passwords are not equal!';
             }
         }
     }
-
 
     public function validateUserAgainstDb()
     {
@@ -106,16 +109,19 @@ class UserModel extends PageModel
         $this->generateMenu();
     }
 
-    public function registerUser()
+    public function registerUserInDb()
     {
-    try {
-            if ($this->userRepository->registerUser($this->name,$this->email,$this->password)) {
-                $this->dbValid = true;
-            } else {
-                $this->errorMessage = 'user is already in database';
-            }
-        } catch (\Throwable $th) {
-            $this->errorMessage = $th->getMessage();
+        $this->userRepository->registerUser($this->name,$this->email,$this->password);
+    }
+
+    public function allowToRegisterUser()
+    {
+        if($this->userRepository->doesUserExist($this->email)){
+            $this->registerErr = 'user is already in database';
+            $this->dbValid = false;
+        } else {
+            $this->dbValid = true;
         }
     }
+
 }

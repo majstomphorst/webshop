@@ -17,17 +17,11 @@ class UserRepository
      * @param   String name
      * @param   String email
      * @param   String password
-     * @return  bool true if user is registerd false oftherwise
      *
      */
     public function registerUser(String $name, String $email, String $password)
     {
-        if (!$this->doesUserExist($email, $password)) {
-            $this->userCrud->storeUser($name, $email, $password);
-            return true;
-        } else {
-            return false;
-        }
+        $this->userCrud->storeUser($name, $email, $password);
     }
 
     /**
@@ -44,21 +38,21 @@ class UserRepository
 
         // if not set no user == false
         if (!isset($UserInfo)) {
-            return null;
+            return false;
         }
         if ($UserInfo->password == $password) {
             return $UserInfo;
         }
-        return null;
+        return false;
     }
 
-/**
- * check if a users email is in the database
- *
- * @param   String email
- * @return  UserInfo or fales
- *
- */
+    /**
+     * check if a users email is in the database
+     *
+     * @param   String email
+     * @return  UserInfo or fales
+     *
+     */
     public function doesUserExist(String $email)
     {
         $dbUserInformation = $this->userCrud->findUserByEmail($email);

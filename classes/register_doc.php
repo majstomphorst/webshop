@@ -1,4 +1,3 @@
-
 <?php
 
 require_once "abstract_form_doc.php";
@@ -17,6 +16,7 @@ class RegisterDoc extends FormDoc
     {
         $this->formTitle($this->model->requested_page);
         $this->startForm();
+        $this->formErrorLine($this->model->registerErr);
         $this->formField("text","name","Your name",
                             $this->model->name,
                             $this->model->nameErr);
