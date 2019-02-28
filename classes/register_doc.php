@@ -30,7 +30,7 @@ class RegisterDoc extends FormDoc
                             $this->model->passwordCheck,
                             $this->model->passwordCheckErr);
         $this->formErrorLine($this->model->passwordNotEqualErr);
-        $this->hiddenFormField();
+        $this->addHiddenFieldWithPageName();
         $this->formButton("submit");
         
     }

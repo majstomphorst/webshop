@@ -1,6 +1,5 @@
 <?php
 include_once 'incl/session_manager.php';
-include_once 'incl/database.php';
 
 function handleAjaxActions()
 {

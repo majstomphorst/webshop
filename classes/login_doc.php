@@ -22,7 +22,7 @@ class LoginDoc extends FormDoc
         $this->formField("password","password","Your password...",
                             $this->model->password,
                             $this->model->passwordErr);
-        $this->hiddenFormField();
+        $this->addHiddenFieldWithPageName();
         $this->formButton("submit");
     }
 

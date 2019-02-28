@@ -25,7 +25,7 @@ class ContactDoc extends FormDoc
                             $this->model->text,
                             $this->model->textErr);
 
-        $this->hiddenFormField();
+        $this->addHiddenFieldWithPageName();
 
         $this->formButton("submit");
     }
