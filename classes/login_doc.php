@@ -14,6 +14,7 @@ class LoginDoc extends FormDoc
     protected function mainContent() 
     {
         $this->formTitle($this->model->requested_page);
+        $this->formErrorLine($this->model->loginErr);
         $this->startForm();
 
         $this->formField("email","email","Your email...",

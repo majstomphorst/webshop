@@ -27,8 +27,6 @@ class UserModel extends PageModel
     public $errorMessage = '';
     public $passwordNotEqualErr = '';
 
-    // if the form is valid
-    public $valid = false;
     // if the user in in the db 
     public $dbValid = false;
 
@@ -78,22 +76,21 @@ class UserModel extends PageModel
             empty($this->emailErr) or empty($this->passwordErr)) {
 
             // check if provided passwords are the same
-            if ($this->password == $this->passwordCheck) {
-                $this->valid = true;
-            } else {
+            if ($this->password != $this->passwordCheck) {
                 $this->passwordNotEqualErr = 'Your passwords are not equal!';
             }
         }
     }
 
+
     public function validateUserAgainstDb()
     {
         $this->userInfo = $this->userRepository->doesUserExist($this->email);
         if ($this->userInfo) {
-            return true; /* JH TIP: zet $this->validDb op true; */
+            $this->dbValid = true;
         } else {
-            /* JH: Zet de $this->loginErr hier */
-            return false; /* JH TIP: zet $this->validDb op false; */
+            $this->loginErr = "Email and password combination invalid";
+            $this->dbValid = false;
         }
     }
 

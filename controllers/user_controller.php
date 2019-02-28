@@ -20,31 +20,20 @@ class UserController
 
         if ($this->model->isPost) {
 
+            // check if the loginform is complete 
             $this->model->validateLoginForm();
-
-            /* JH TIP: ik zou de try { } catch  verplaatsen naar validateUserAgainstDb */
+            // check if credentials are in the db
             try {
-                // check if the login form is complete
-                if ($this->model->valid) {
-
-                    /* JH: Ik zou dit opschrijven als 
-                    
-                           $this->model->validateUserAgainstDb();
-                           if ($this->model->dbValid) { 
-                              $this->model->loginUser(); ...
-                     */
-                    if ($this->model->validateUserAgainstDb()) {
-                        $this->model->loginUser();
-                        
-                        $view = new HomeDoc($this->model);
-                    } else {
-                        /* JH: Deze actie mag je in validateUserAgainstDb() doen. */
-                        $this->model->LoginErr = "Email and password combination invalid";
-                    }
-                }
-
+                $this->model->validateUserAgainstDb();
             } catch (\Throwable $th) {
                 $this->model->errorMessage = $th->getMessage();
+            }
+            
+            if ($this->model->dbValid) {
+                $this->model->loginUser();
+                $view = new HomeDoc($this->model);
+            } else {
+
             }
         }
 
