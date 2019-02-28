@@ -6,16 +6,16 @@ require_once "incl/rating_info.php";
 
 class ProductsModel extends PageModel
 {
-    
+
     public $products = array();
 
-
-    public $optionToBuy = 'disabled'; /* Dit is iets voor de $view, $optionToBuy zou alleen true of false moeten zijn in een model */
+     /* Dit is iets voor de $view, $optionToBuy zou alleen true of false moeten zijn in een model */
     public $productId = null;
 
     public $cartRows = array();
-
     public $jsonData = array();
+
+    public $allowedToBuy = false;
 
     /** @var ShopCrud */
     public $shopCrud = null;
@@ -25,6 +25,7 @@ class ProductsModel extends PageModel
         // pass the model on to our parent class (PageModel)
         parent::__construct($model);
         $this->shopCrud = new ShopCrud($crud);
+        $this->allowedToBuy = $this->loggedIn;
     }
 
     public function getProducts()
@@ -101,7 +102,6 @@ class ProductsModel extends PageModel
      */
     public function prepareShoppingCart()
     {
-
         $this->cartRows = array(); 
         /* JH TIP: zet $this->totalPrice = 0; hier */
         foreach (getCart() as $productId => $amount) {

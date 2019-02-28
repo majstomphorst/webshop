@@ -12,14 +12,15 @@ class DetailProductDoc extends productDoc
 
     public function mainContent()
     {
+        if ($this->model->allowedToBuy) {
+            $optionToBuy = '';
+        } else {
+            $optionToBuy = 'disabled';
+        }
+
         if (!isset($this->model->products)){
             echo 'no products found.';
             return;
-        }
-
-        // if the user is login activate buy option 
-        if ($this->model->loggedIn) {
-            $this->model->optionToBuy = '';
         }
 
         echo '
@@ -37,10 +38,10 @@ class DetailProductDoc extends productDoc
                                 <hr>
                                 <h3>&euro; '. money_format('%!.2n',$this->model->products->price) . '</h3>
                                 <hr>';
-        if ($this->model->loggedIn) {
-            $this->showRatingPanel();
-        }
-            $this->showBuyButton($this->model->products->id,$this->model->optionToBuy);
+                                if($this->model->allowedToBuy) {
+                                    $this->showRatingPanel();
+                                }
+                                $this->showBuyButton($this->model->products->id,$optionToBuy);
                           echo '</div>
                         </div>
                     </div>
