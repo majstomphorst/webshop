@@ -115,7 +115,7 @@ function getProductById($productId)
 {
     $conn = connectToEducomDatabase();
     try {
-        $sql = "SELECT * FROM products WHERE id='$productId'"; /* JH TIP: Beter string concaternatie gebruiken */
+        $sql = "SELECT * FROM products WHERE id='$productId'";
         $result = mysqli_query($conn,$sql);
         
         
@@ -150,6 +150,7 @@ function storeOrder($orderInfo, $userId)
     unset($orderInfo['total_price']);
 
     try {
+        var_dump($orderInfo);
         $sql = "INSERT INTO orders (user_id)
                 VALUES('".$userId."')";
 
@@ -177,6 +178,8 @@ function storeOrder($orderInfo, $userId)
     } finally {
         mysqli_close($conn);
     }
+
+
 }
 
 /**

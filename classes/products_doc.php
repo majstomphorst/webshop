@@ -61,7 +61,7 @@ class ProductsDoc extends ProductDoc
                     /* JH: Bovenstaand form wordt ook in detailProductDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
                     // check if a user in loggein 
                     if(!$this->model->optionToBuy) { /* JH TIP stop de if in showReatingPanel */
-                        $this->showReatingPanel();
+                        $this->showRatingPanel();
                     }
                     
                 echo'  <br>
