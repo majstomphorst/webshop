@@ -22,6 +22,8 @@ function getRatingInfo(productIds) {
       productIds: productIds
     },
     function (data) {
+      console.log(data);
+      
       
       
       // card where the product is displayed
@@ -31,13 +33,15 @@ function getRatingInfo(productIds) {
         let productId = $(this).find(".buyButton").val();
 
         
-        data.quotesArray.forEach(ratingInfo => {
+        data.forEach(ratingInfo => {
           console.log(ratingInfo);
           if (ratingInfo.product_id == productId) {
             let avg = parseFloat(ratingInfo.avgRating).toFixed(2)
             $(this).find(".avgRating").text(avg);
-            $(this).find(".yourRating").text(ratingInfo.userRating);
-            
+            if (ratingInfo.userRating) {
+              $(this).find(".yourRating").text(ratingInfo.userRating);
+            }
+          
             let card = $(this);
             colorStars(card, ratingInfo.userRating);
           }

@@ -25,8 +25,8 @@ class CartDoc extends BasicDoc
                 <tbody>';
 
                 
-        if (count($this->model->cart) >= 0) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
-            foreach ($this->model->cart as $cartRow) {
+        if (count($this->model->cartRows) >= 0) { /* JH: Zier opmerking in product_model.php 107 wordt deze if vervanger door: foreach ($this->model->cartRows as $cartRow) { $this->showRow($cartRow) } */
+            foreach ($this->model->cartRows as $cartRow) {
                     $this->showRow($cartRow);
                 }
         }
@@ -44,15 +44,15 @@ class CartDoc extends BasicDoc
     {
         echo '
     <tr>
-        <th>' . $cartRow['name'] . '</th>
-        <th>&euro; ' . money_format('%!.2n', $cartRow['price']) . '</th>
+        <th>' . $cartRow['product']->name . '</th>
+        <th>&euro; ' . money_format('%!.2n', $cartRow['product']->price) . '</th>
         <th>
             <div class="row">
                 <div class="col-sm">
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="removeFromCart">
-                        <button value="' . $cartRow['id'] . '" type="submit" name="productId" class="btn btn-outline-danger btn-block">&#8678;</button>
+                        <button value="' . $cartRow['product']->id . '" type="submit" name="productId" class="btn btn-outline-danger btn-block">&#8678;</button>
                     </form>
                 </div>
                 <div class="col-sm col-5">
@@ -63,7 +63,7 @@ class CartDoc extends BasicDoc
                     <form class="form-inline" action="index.php" method="post">
                         <input type="hidden" name="page" value="cart">
                         <input type="hidden" name="action" value="addToCart">
-                        <button value="' . $cartRow['id'] . '" type="submit" name="productId" class="btn btn-outline-success btn-block">&#8680;</button>
+                        <button value="' . $cartRow['product']->id . '" type="submit" name="productId" class="btn btn-outline-success btn-block">&#8680;</button>
                     </form>
                 </div>
             </div>

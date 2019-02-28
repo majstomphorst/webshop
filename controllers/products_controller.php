@@ -8,7 +8,7 @@ require_once "classes/top5_doc.php";
 
 class ProductsController
 {
-    /** @var PageModel */
+    /** @var ProductsModel */
     private $model;
 
     public function __construct(PageModel $pageModel, CRUD $crud)
@@ -25,7 +25,7 @@ class ProductsController
 
     public function handleDetailProductsRequest()
     {
-        $this->model->getProductById();
+        $this->model->getProduct();
         
 
         if (!$this->model->products) {

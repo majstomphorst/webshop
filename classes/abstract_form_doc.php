@@ -27,10 +27,9 @@ abstract class FormDoc extends basicDoc
 
     protected function startForm(String $action = "index.php", String $methode = "POST")
     {
-        echo "<form class='form-group' action='$action' method='$methode'>"; 
-        /* JH TIP: advies om $ in strings niet te gebruiken, en voor html attributen de " te gebruiken, omdat dat i.c.m. jQuery tot verwarring kan leiden. 
-                   Gebruikt string concaternatie dus echo '<form class="form-group" action="'.$action.'" method="'.$methode.'">'; */
+        echo '<form class="form-group" action="'.$action.'" method="'.$methode.'">';
     }
+    
     protected function endForm()
     {
         echo "</form>";   

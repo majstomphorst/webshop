@@ -157,7 +157,7 @@ class ShopCRUD
 
         if (count($result) > 0) {
             // output data of each row
-            // $sql = "UPDATE ratings SET rating=:rating WHERE product_id=:product_id AND user_id=:user_id";
+            $sql = "UPDATE ratings SET rating=:rating WHERE product_id=:product_id AND user_id=:user_id";
             $this->crud->updateRow($sql, $params);
         } else {
             $sql = "INSERT INTO ratings (product_id, user_id, rating)
