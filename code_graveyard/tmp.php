@@ -1,4 +1,4 @@
-  <?php
+  <!-- <?php
   
   $host =  'localhost';
   $user = 'root';
@@ -81,4 +81,4 @@
   // $posts = $stmt->fetchAll();
   // foreach($posts as $post){
   //   echo $post->title . '<br>';
-  // }
+  // } -->

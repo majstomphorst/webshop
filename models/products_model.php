@@ -82,12 +82,14 @@ class ProductsModel extends PageModel
                     $this->prepareShoppingCart();
 
                     $cartRows = array();
+                    //TODO: replace to CRUD. CRUD could take the object.... for later
                     foreach ($this->cartRows as $orderRow) {
                         array_push($cartRows, $orderRow->convertToArrayForStorage());
                     }
+
                     $userId = getLoggedInUserId();
 
-                    if ($this->shopCrud->storeOrder($cartRows, $userId)) { /* JH: Dit wordt dan: if (storeOrder($this->cartRows, $userId)) { ... */
+                    if ($this->shopCrud->storeOrder($cartRows, $userId)) { 
                         removeCart();
                     }
                     break;
@@ -108,7 +110,6 @@ class ProductsModel extends PageModel
         $this->totalPrice = 0;
 
         foreach (getCart() as $productId => $amount) {
-            /* JH TIP: Maak van cartRow een class, dan hoef je hier geen arrays meer te gebruiken */
             $product = $this->shopCrud->getProductById($productId);/* JH: Hier wordt voor ieder product in de cart een SQL query gedaan. Het is beter om voor de foreach een $products = getProducts() (= 1 SQL query) te doen om en dan hier te zetten $cartRow = array('product' => $products[$productId]); */
             $orderRow = new OrderRow($product);
             $orderRow->amount = intval($amount);
