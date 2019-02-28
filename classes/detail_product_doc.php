@@ -38,7 +38,7 @@ class DetailProductDoc extends productDoc
                                 <h3>&#8364; ' /* JH TIP: Gebruik &euro hier */ . money_format('%.2n' /* Volgens mij moet de format '%!.2n' zijn om het euroteken niet te tonen */, $this->model->products->price) . '</h3>
                                 <hr>';
         if ($this->model->loggedIn) {
-            $this->showReatingPanel();
+            $this->showRatingPanel();
         }
         /* JH: Onderstaand form wordt ook in productDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
         echo '<form action="index.php" method="post">
