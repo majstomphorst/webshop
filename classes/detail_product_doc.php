@@ -12,6 +12,7 @@ class DetailProductDoc extends productDoc
 
     public function mainContent()
     {
+        //TODO: deze staat ook "hier"
         if ($this->model->allowedToBuy) {
             $optionToBuy = '';
         } else {

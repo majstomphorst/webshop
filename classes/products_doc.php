@@ -27,24 +27,25 @@ class ProductsDoc extends ProductDoc
             return;
         }
 
-        /* JH: Dit is functionaliteit voor de model, niet voor de view */
-        // if the user is login activate buy option 
-        
         $this->startContainer();
+
         foreach ($this->model->products as $product) {
             $this->showProductCard($product);
         }
+
         $this->endContainer();
 
     }
 
     private function showProductCard($product)
     {
+        //TODO: deze staat ook "hier"
         if ($this->model->allowedToBuy) {
             $optionToBuy = '';
         } else {
             $optionToBuy = 'disabled';
         }
+
         setlocale(LC_MONETARY, 'nl_NL');
         
         echo '
@@ -57,11 +58,8 @@ class ProductsDoc extends ProductDoc
                     <div class="card-footer bg-transparent border-success">'. money_format('%!.2n', $product->price) .'</div>';
                     
                     $this->showBuyButton($product->id,$optionToBuy);
-                    /* JH: Bovenstaand form wordt ook in detailProductDoc gebruikt, misschien is een functie in abstractProductDoc genaamd showBuyButton($productId) wel handig */
-                    // check if a user in loggein 
-                    if($this->model->allowedToBuy) { /* JH TIP stop de if in showReatingPanel */
-                        $this->showRatingPanel();
-                    }
+                    
+                    $this->showRatingPanel();
                 echo'  <br>
                     <a href="?page=detailProduct&id='. $product->id .'" ><button type="button" class="btn btn-info btn-sm btn-block">More information</button></a>
                 </div>
