@@ -64,10 +64,11 @@ class ShopCRUD
         $order_id = $this->crud->createRow($sql, $values);
 
         $sql = "INSERT INTO orders_products (order_id, product_id, amount, price)
-                            VALUES(:order_id,:productId,:amount,:unit_price)";
+                            VALUES(:order_id,:product_id,:amount,:unit_price)";
 
         foreach ($orderInfo as $orderRow) {
             $orderRow['order_id'] = $order_id;
+
             $this->crud->createRow($sql, $orderRow);
         }
         return true;

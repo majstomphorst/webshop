@@ -27,7 +27,6 @@ class ProductsController
     {
         $this->model->getProduct();
         
-
         if (!$this->model->products) {
             $this->model->requested_page = "products";
             $this->handleProductsRequest();

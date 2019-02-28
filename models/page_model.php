@@ -71,7 +71,6 @@ class PageModel
         return isset($arry[$key]) ? $arry[$key] : $default;
     }
 
-    /* JH: Verplaats naar PageModel */
     public function test_input($data)
     {
         $data = trim($data);
