@@ -82,7 +82,6 @@ class ProductsModel extends PageModel
                     $this->prepareShoppingCart();
 
                     $cartRows = array();
-                    //TODO: replace to CRUD. CRUD could take the object.... for later
                     foreach ($this->cartRows as $orderRow) {
                         array_push($cartRows, $orderRow->convertToArrayForStorage());
                     }
