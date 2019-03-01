@@ -33,7 +33,9 @@ class UserController
                     if ($this->model->dbValid) {
                         $this->model->loginUser();
                         $view = new HomeDoc($this->model);
-                    } 
+                    } else {
+                        $this->model->password = '';
+                    }
 
                 } catch (\Throwable $th) {
                     $this->model->errorMessage = $th->getMessage();
@@ -63,6 +65,8 @@ class UserController
     
                         // update model
                         $this->model->requested_page = 'login';
+                        $this->model->password = '';
+                        $this->model->passwordCheck = '';
                         $view = new LoginDoc($this->model);
     
                     } // back to register
