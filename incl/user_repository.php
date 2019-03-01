@@ -34,16 +34,18 @@ class UserRepository
      */
     public function validateUser(String $email, String $password)
     {
-        $UserInfo = $this->userCrud->findUserByEmail($email);
+        $userInfo = $this->userCrud->findUserByEmail($email);
 
         // if not set no user == false
-        if (!isset($UserInfo)) {
+        if (!isset($userInfo)) {
             return false;
         }
-        if ($UserInfo->password == $password) {
-            return $UserInfo;
+        if (password_verify($password, $userInfo->password)) {
+            return $userInfo;
+        } else {
+            return false;
         }
-        return false;
+
     }
 
     /**

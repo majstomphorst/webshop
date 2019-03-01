@@ -27,6 +27,8 @@ class UserController
                 // check if credentials are in the db
                 try {
                     $this->model->validateUserAgainstDb();
+                    
+                    $this->model->hashPassword();
 
                     if ($this->model->dbValid) {
                         $this->model->loginUser();
@@ -54,6 +56,8 @@ class UserController
                     $this->model->allowToRegisterUser();
                 
                     if ($this->model->dbValid) {
+
+                        $this->model->hashPassword();
                         // register user
                         $this->model->registerUserInDb();
     

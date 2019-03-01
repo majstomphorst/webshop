@@ -81,7 +81,7 @@ class UserModel extends PageModel
 
     public function validateUserAgainstDb()
     {
-        $this->userInfo = $this->userRepository->doesUserExist($this->email);
+        $this->userInfo = $this->userRepository->validateUser($this->email,$this->password);
         if ($this->userInfo) {
             $this->dbValid = true;
         } else {
@@ -115,6 +115,11 @@ class UserModel extends PageModel
         } else {
             $this->dbValid = true;
         }
+    }
+    
+    public function hashPassword()
+    {
+        $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
 
 }
