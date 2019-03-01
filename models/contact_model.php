@@ -6,9 +6,11 @@ class ContactModel extends PageModel
     public $name = '';
     public $email = '';
     public $text = '';
+
     public $nameErr = '';
     public $emailErr = '';
     public $textErr = '';
+
     public $valid = False;
 
     public function __construct(PageModel $model)
