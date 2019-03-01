@@ -62,25 +62,31 @@ class basicDoc extends htmlDoc
     private function mainMenu()
     {
         echo "<nav class='navbar navbar-expand-lg navbar-light bg-light static-top shadow'>
-            <div class='navbar-nav'>
-            <a class='navbar-brand' href='index.php?page=home'>
-            <img src='assets/images/logo.png' width='30' height='30' alt=''>
-            </a>
-            <a class='navbar-brand' href='#'>Educom</a>
-            <ul class='navbar-nav mr-auto'>";
-        foreach ($this->model->menuLeft as $pageLink => $buttonText) {
-            $this->showMenuItem($pageLink, $buttonText);
-        }
-        echo "</ul>
-            </div>
-            <div class='navbar-nav ml-auto'>
-            <ul class='navbar-nav mr-auto'>";
-        foreach ($this->model->menuRight as $pageLink => $buttonText) {
-            $this->showMenuItem($pageLink, $buttonText);
-        }
-        echo "</ul>
-            </div>
-            </nav>";
+                
+                <a class='navbar-brand' href='index.php?page=home'>
+                    <img src='assets/images/logo.png' width='30' height='30' alt=''>
+                </a>
+                <a class='navbar-brand' href='#'>Educom</a>
+                
+                <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarTogglerDemo02' aria-controls='navbarTogglerDemo02' aria-expanded='false' aria-label='Toggle navigation'>
+                    <span class='navbar-toggler-icon'></span>
+                </button>
+
+                <div class='collapse navbar-collapse justify-content' id='navbarTogglerDemo02'>
+                    <ul class='navbar-nav mr-auto'>";
+                    foreach ($this->model->menuLeft as $pageLink => $buttonText) {
+                        $this->showMenuItem($pageLink, $buttonText);
+                    }
+            echo   "</ul>";
+        echo   '</div>';
+        echo   "<div class='navbar-nav collapse navbar-collapse' id='navbarTogglerDemo02'>
+                    <ul class='navbar-nav ml-auto'>";  
+                    foreach ($this->model->menuRight as $pageLink => $buttonText) {
+                                    $this->showMenuItem($pageLink, $buttonText);
+                                }
+        echo        '</ul>
+                </div>';
+       echo "</nav>";
     }
 
     private function showMenuItem($pageLink, $buttonText)
