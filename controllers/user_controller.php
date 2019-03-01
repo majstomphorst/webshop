@@ -62,11 +62,9 @@ class UserController
                         $this->model->hashPassword();
                         // register user
                         $this->model->registerUserInDb();
-    
-                        // update model
-                        $this->model->requested_page = 'login';
-                        $this->model->password = '';
-                        $this->model->passwordCheck = '';
+                        // update model 
+                        $this->model->prepareForLoginView();
+
                         $view = new LoginDoc($this->model);
     
                     } // back to register

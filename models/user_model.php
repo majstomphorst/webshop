@@ -122,4 +122,11 @@ class UserModel extends PageModel
         $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     }
 
+    public function prepareForLoginView() 
+    {
+        $this->requested_page = 'login';
+        $this->password = '';
+        $this->passwordCheck = '';
+    }
+
 }
