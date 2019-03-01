@@ -108,17 +108,25 @@ class ProductsModel extends PageModel
     {
         $this->cartRows = array(); 
         $this->totalPrice = 0;
+        
+        $inventory = $this->shopCrud->getProducts();
 
         foreach (getCart() as $productId => $amount) {
-            $product = $this->shopCrud->getProductById($productId);/* JH: Hier wordt voor ieder product in de cart een SQL query gedaan. Het is beter om voor de foreach een $products = getProducts() (= 1 SQL query) te doen om en dan hier te zetten $cartRow = array('product' => $products[$productId]); */
+
+            $product = array();
+            foreach ($inventory as $inventoryProduct) {
+                if ($inventoryProduct->id == $productId) {
+                    $product = $inventoryProduct;
+                }
+            }
+
             $orderRow = new OrderRow($product);
             $orderRow->amount = intval($amount);
             $orderRow->linePrice = floatval($orderRow->amount) * floatval($orderRow->unitPrice);
             array_push($this->cartRows,$orderRow);
             $this->totalPrice += $orderRow->amount * $orderRow->unitPrice;
         }
-
-        /* JH: Zet hier $this->optionToBuy = $this->loggedin; */
+        $this->allowedToBuy = $this->loggedIn;
     }
 
 
@@ -137,8 +145,7 @@ class ProductsModel extends PageModel
                 $this->shopCrud->updateOrStoreRating($productId, $rating, getLoggedInUserId());
                 break;
             case 'getRatingInfo':
-                /* JH TIP: Deze 'case' begint aardig lang te worden, misschien private functie van maken? */
-                $productIds = $this->getPostVar('productIds'); /* Deze variabele hoeft niet als class variabelen bewaard te blijven, dus kan een lokale variabele zijn */
+                $productIds = $this->getPostVar('productIds');
 
                 foreach ($productIds as $key => $productid) {
                     $productIds[$key] = $this->test_input($productid);
@@ -146,12 +153,7 @@ class ProductsModel extends PageModel
 
                 $userRatings = $this->shopCrud->getUserRating(getLoggedInUserId());
                 $avgRatings = $this->shopCrud->getAvgProductRating($productIds);
-
                 $this->prepareRatingInfoForAjax($userRatings,$avgRatings);
-
-                break;
-            default:
-                # code...
                 break;
         }
     }

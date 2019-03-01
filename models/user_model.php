@@ -5,13 +5,6 @@ require_once "incl/crud.php";
 require_once "incl/user_crud.php";
 require_once "incl/user_repository.php";
 
-/**
-* 
-* This needs a description /* JH: IT SURE DOES
-* 
-*
-* 
-*/
 class UserModel extends PageModel
 {
     public $name = '';

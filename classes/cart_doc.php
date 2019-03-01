@@ -12,6 +12,13 @@ class CartDoc extends BasicDoc
 
     public function mainContent()
     {
+
+        if ($this->model->allowedToBuy) {
+            $optionToBuy = '';
+        } else {
+            $optionToBuy = 'disabled';
+        }
+
         echo '
             <table class="table">
                 <thead class="thead-light">
@@ -30,13 +37,17 @@ class CartDoc extends BasicDoc
                     $this->showRow($cartRow);
                 }
         }
-        //TODO:  /* JH Extra: Toon ook het total van de Cart hier aan de gebruiker (opgeslagen in $model->total) */
-        echo '</tbody>
+        echo '
+        <tr>
+            <td colspan="3"></td>
+            <td>'.$this->model->totalPrice.'</td>
+        </tr>
+        </tbody>
             </table>
             <form action="index.php" method="post">
                 <input type="hidden" name="page" value="cart">
                 <input type="hidden" name="action" value="placeOrder">
-                <button type="submit" name="productId" class="btn btn-success">Order!</button>
+                <button type="submit" name="productId" class="btn btn-success" '.$optionToBuy.'>Order!</button>
             </form>';
     }
 

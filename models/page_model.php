@@ -4,8 +4,9 @@ require_once "incl/session_manager.php";
 class PageModel
 {
     public $requested_page;
-    /** @var bool */
+    /** @var Bool */
     public $isPost;
+    /** @var Bool */
     public $loggedIn;
     public $requested_type;
     public $menuLeft;
@@ -25,7 +26,8 @@ class PageModel
 
     public function getRequestedPage()
     {
-        $this->requested_type = $_SERVER['REQUEST_METHOD']; /* JH: Wordt dit nog ergens anders gebruikt? */
+        
+        $this->requested_type = $_SERVER['REQUEST_METHOD'];// TODO: ask Jeroen /* JH: Wordt dit nog ergens anders gebruikt? */
         $this->isPost = $this->requested_type == 'POST';
         if ($this->isPost) {
             $this->requested_page = $this->getPostVar('page', 'home');
