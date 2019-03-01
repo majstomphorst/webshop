@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, #0062E6, #33AEFF);
+    background: #A8C9DA;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
@@ -10,6 +10,7 @@ body {
 }
 
 .card {
+  background: #F1F1F1;
     border-radius: 1rem;
 }
 
@@ -99,3 +100,23 @@ body {
   color:#FF912C;
 }
 
+.nav-link:hover { 
+  color: #DB5756 !important; 
+}
+.active {
+  color: #DB5756!important;
+  border-bottom: 2px solid #DB5756;
+}
+
+
+/* footer */
+footer {
+  background: #061324;
+}
+footer > p {
+  color: #DB5756;
+}
+
+a:hover{
+  color: #DB5756 !important; 
+}

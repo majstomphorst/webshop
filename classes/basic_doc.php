@@ -123,8 +123,8 @@ class basicDoc extends htmlDoc
 
     private function bodyFooter()
     {
-        echo "<footer class='py-3 bg-dark'>
-            <p class='m-0 text-center text-white'>Copyright &copy; 2019, Maxim Stomphorst</p>
+        echo "<footer class='py-3'>
+            <p class='m-0 text-center'>Copyright &copy; 2019, Maxim Stomphorst</p>
             </footer>";
     }
 
