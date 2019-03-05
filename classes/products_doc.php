@@ -39,7 +39,6 @@ class ProductsDoc extends ProductDoc
 
     private function showProductCard($product)
     {
-        //TODO: deze staat ook "hier"
         if ($this->model->allowedToBuy) {
             $optionToBuy = '';
         } else {
@@ -49,21 +48,22 @@ class ProductsDoc extends ProductDoc
         setlocale(LC_MONETARY, 'nl_NL');
         
         echo '
-        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-offset-0">
-            <div class="card border-dark text-center">
+        <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-3 col-offset-0 pb-4">
+            <div class="card border-dark h-100 text-center">
+
                 <img src="./assets/images/' . $product->image_name . '.png" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">' . $product->name . '</h5>
                     <p class="card-text">' . $product->description . '</p>
-                    <div class="card-footer bg-transparent border-success">'. money_format('%!.2n', $product->price) .'</div>';
-                    
-                    $this->showBuyButton($product->id,$optionToBuy);
-                    
-                    $this->showRatingPanel();
-                echo'  <br>
-                    <a href="?page=detailProduct&id='. $product->id .'" ><button type="button" class="btn btn-info btn-sm btn-block">More information</button></a>
                 </div>
-            </div>
+                <div class="card-footer bg-transparent">'. money_format('%!.2n', $product->price) .'<hr>';
+                    $this->showBuyButton($product->id,$optionToBuy);
+                    $this->showRatingPanel();
+                echo '
+                <a href="?page=detailProduct&id='. $product->id .'" ><button type="button" class="btn btn-info btn-sm btn-block">More information</button></a>
+                </div>';
+                echo'
+                </div>
         </div>
         ';
     }
